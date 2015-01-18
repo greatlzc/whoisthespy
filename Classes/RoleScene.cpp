@@ -85,31 +85,31 @@ bool RoleScene::init()
 //    // add the sprite as a child to this layer
 //    this->addChild(sprite, 0);
     
-    auto common = Label::create("平民：", "Arial", 70);
-    common->setPosition(Vec2(origin.x + visibleSize.width/2.5,
+    auto guy = Label::create("平民：", "Arial", 70);
+    guy->setPosition(Vec2(origin.x + visibleSize.width/2.5,
                              origin.y + visibleSize.height/1.5));
-    this->addChild(common, 1);
+    this->addChild(guy, 1);
     
     auto spy = Label::create("卧底：", "Arial", 70);
     spy->setPosition(Vec2(origin.x + visibleSize.width/2.5,
                           origin.y + visibleSize.height/2));
     this->addChild(spy, 1);
     
-    auto nothing = Label::create("白板：", "Arial", 70);
-    nothing->setPosition(Vec2(origin.x + visibleSize.width/2.5,
+    auto lucky = Label::create("白板：", "Arial", 70);
+    lucky->setPosition(Vec2(origin.x + visibleSize.width/2.5,
                               origin.y + visibleSize.height/3));
-    this->addChild(nothing, 1);
+    this->addChild(lucky, 1);
     
     //平民 number selector
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
     auto c_minus = MenuItemFont::create("<", CC_CALLBACK_1(RoleScene::minus, this, GUY));
     auto c_minus_menu = Menu::create(c_minus, NULL);
-    c_minus_menu->setPosition(Vec2(common->getPositionX() + common->getContentSize().width/2, common->getPositionY()));
+    c_minus_menu->setPosition(Vec2(guy->getPositionX() + guy->getContentSize().width/2, guy->getPositionY()));
     this->addChild(c_minus_menu, 1);
     
     auto c_num = Label::create("0", "Arial", 80);
-    c_num->setPosition(Vec2(c_minus_menu->getPositionX() + common->getContentSize().width/3, common->getPositionY()));
+    c_num->setPosition(Vec2(c_minus_menu->getPositionX() + guy->getContentSize().width/3, guy->getPositionY()));
     c_num->setTag(GUY);
     this->addChild(c_num, 1);
     
@@ -117,7 +117,7 @@ bool RoleScene::init()
     MenuItemFont::setFontSize(80);
     auto c_add = MenuItemFont::create(">", CC_CALLBACK_1(RoleScene::add, this, GUY));
     auto c_add_menu = Menu::create(c_add, NULL);
-    c_add_menu->setPosition(Vec2(c_num->getPositionX() + common->getContentSize().width/3, common->getPositionY()));
+    c_add_menu->setPosition(Vec2(c_num->getPositionX() + guy->getContentSize().width/3, guy->getPositionY()));
     this->addChild(c_add_menu, 1);
     
     //卧底 number selector
@@ -145,11 +145,11 @@ bool RoleScene::init()
     MenuItemFont::setFontSize(80);
     auto n_minus = MenuItemFont::create("<", CC_CALLBACK_1(RoleScene::minus, this, LUCKY));
     auto n_minus_menu = Menu::create(n_minus, NULL);
-    n_minus_menu->setPosition(Vec2(nothing->getPositionX() + nothing->getContentSize().width/2, nothing->getPositionY()));
+    n_minus_menu->setPosition(Vec2(lucky->getPositionX() + lucky->getContentSize().width/2, lucky->getPositionY()));
     this->addChild(n_minus_menu, 1);
     
     auto n_num = Label::create("0", "Arial", 80);
-    n_num->setPosition(Vec2(n_minus_menu->getPositionX() + nothing->getContentSize().width/3, nothing->getPositionY()));
+    n_num->setPosition(Vec2(n_minus_menu->getPositionX() + lucky->getContentSize().width/3, lucky->getPositionY()));
     n_num->setTag(LUCKY);
     this->addChild(n_num, 1);
     
@@ -157,7 +157,7 @@ bool RoleScene::init()
     MenuItemFont::setFontSize(80);
     auto n_add = MenuItemFont::create(">", CC_CALLBACK_1(RoleScene::add, this, LUCKY));
     auto n_add_menu = Menu::create(n_add, NULL);
-    n_add_menu->setPosition(Vec2(n_num->getPositionX() + nothing->getContentSize().width/3, nothing->getPositionY()));
+    n_add_menu->setPosition(Vec2(n_num->getPositionX() + lucky->getContentSize().width/3, lucky->getPositionY()));
     this->addChild(n_add_menu, 1);
     
     return true;
