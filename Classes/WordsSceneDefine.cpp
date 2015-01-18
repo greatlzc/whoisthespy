@@ -130,6 +130,10 @@ void WordsSceneDefine::menuStartCallback(Ref* pSender)
     
     auto gWord = (TextFieldTTF*)this->getChildByTag(1);
     auto sWord = (TextFieldTTF*)this->getChildByTag(2);
+    if (gWord->getString() == "" || sWord->getString() == "")
+    {
+        return;
+    }
     WordsManager::getInstance()->addWord(gWord->getString(), sWord->getString());
     Banker::getInstance()->setWords(WordsManager::getInstance()->getWordsbySelect());
     auto playingScene = PlayingScene::createScene();

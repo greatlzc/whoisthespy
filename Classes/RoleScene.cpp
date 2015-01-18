@@ -170,6 +170,10 @@ void RoleScene::menuStartCallback(Ref* pSender)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
+    if (Banker::getInstance()->numGuy == 0 || Banker::getInstance()->numSpy == 0)
+    {
+        return;
+    }
     auto nameScene = NameScene::createScene();
     Director::getInstance()->replaceScene(nameScene);
     

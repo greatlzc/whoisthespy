@@ -145,6 +145,15 @@ void NameScene::menuStartCallback(Ref* pSender)
     MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
     return;
 #endif
+    int remain = Banker::getInstance()->numSpy +
+    Banker::getInstance()->numGuy +
+    Banker::getInstance()->numLucky -
+    Banker::getInstance()->playerCount();
+    
+    if (remain != 0) {
+        return;
+    }
+    
     auto wordsScene = WordsScene::createScene();
     Director::getInstance()->replaceScene(wordsScene);
     
