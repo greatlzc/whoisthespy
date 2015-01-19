@@ -40,39 +40,6 @@ bool PlayingScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-    
-    // add a "close" icon to exit the progress. it's an autorelease object
-//    auto startItem = MenuItemImage::create(
-//                                           "play 2.png",
-//                                           "play2 2.png",
-//                                           CC_CALLBACK_1(PlayingScene::menuStartCallback, this));
-//    startItem->setScale(0.6);
-//    startItem->setPosition(Vec2(origin.x + visibleSize.width/2,
-//                                origin.y + visibleSize.height/3));
-//    
-//    // create menu, it's an autorelease object
-//    auto menu = Menu::create(startItem, NULL);
-//    menu->setPosition(Vec2::ZERO);
-//    this->addChild(menu, 1);
-    
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-//    auto label = LabelTTF::create("游戏中...", "Abduction.ttf", 80);
-//    
-//    // position the label on the center of the screen
-//    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-//                            origin.y + visibleSize.height/1.5));
-//    
-//    // add the label as a child to this layer
-//    this->addChild(label, 1);
-    
     // add "StartScene" splash screen"
     auto sprite = Sprite::create("mainbg.png");
     
@@ -147,16 +114,8 @@ bool PlayingScene::init()
 
 void PlayingScene::menuStartCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
     auto resultScene = ResultScene::createScene();
     Director::getInstance()->replaceScene(resultScene);
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    //exit(0);
-#endif
 }
 
 void PlayingScene::OnForgotWord(Ref* pSender)

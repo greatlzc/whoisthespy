@@ -39,8 +39,6 @@ public:
                          cocos2d::Mat4 const &transform, uint32_t flags) override;
     
     void textFieldPressed(Ref* pSender, int index);
-    
-    //void update(float dt);
 };
 
 #endif /* defined(__HelloWorldDemo__WordsScene__) */

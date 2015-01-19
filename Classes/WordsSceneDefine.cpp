@@ -123,11 +123,6 @@ bool WordsSceneDefine::init()
 
 void WordsSceneDefine::menuStartCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
-    
     auto gWord = (TextFieldTTF*)this->getChildByTag(1);
     auto sWord = (TextFieldTTF*)this->getChildByTag(2);
     if (gWord->getString() == "" || sWord->getString() == "")
@@ -138,10 +133,6 @@ void WordsSceneDefine::menuStartCallback(Ref* pSender)
     Banker::getInstance()->setWords(WordsManager::getInstance()->getWordsbySelect());
     auto playingScene = PlayingScene::createScene();
     Director::getInstance()->replaceScene(playingScene);
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    //exit(0);
-#endif
 }
 
 bool WordsSceneDefine::onTextFieldAttachWithIME(TextFieldTTF *sender)
@@ -189,8 +180,3 @@ bool WordsSceneDefine::onTextFieldDeleteBackward(TextFieldTTF *sender, const cha
 bool WordsSceneDefine::onVisit(TextFieldTTF *sender, Renderer *renderer, const Mat4 &transform, uint32_t flags) {
     return TextFieldDelegate::onVisit(sender, renderer, transform, flags);
 }
-
-//void WordsSceneDefine::update(float dt)
-//{
-//    
-//}
