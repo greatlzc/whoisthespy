@@ -171,7 +171,7 @@ void RoleScene::menuStartCallback(Ref* pSender)
         return;
     }
     auto nameScene = NameScene::createScene();
-    Director::getInstance()->replaceScene(nameScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, nameScene));
 }
 
 void RoleScene::minus(Ref *pSender, ROLE t)

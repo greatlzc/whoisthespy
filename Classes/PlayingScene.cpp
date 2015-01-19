@@ -115,7 +115,7 @@ bool PlayingScene::init()
 void PlayingScene::menuStartCallback(Ref* pSender)
 {
     auto resultScene = ResultScene::createScene();
-    Director::getInstance()->replaceScene(resultScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, resultScene));
 }
 
 void PlayingScene::OnForgotWord(Ref* pSender)
@@ -288,6 +288,6 @@ void PlayingScene::update(float dt)
     //check if game is ending every second
     if (isGameEnded) {
         auto resultScene = ResultScene::createScene();
-        Director::getInstance()->replaceScene(resultScene);
+        Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, resultScene));
     }
 }

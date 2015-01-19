@@ -211,7 +211,7 @@ void ResultScene::menuStartCallback(Ref* pSender)
 {
     //to do
     auto wordsScene = WordsScene::createScene();
-    Director::getInstance()->replaceScene(wordsScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, wordsScene));
 }
 
 void ResultScene::menuStopCallback(Ref* pSender)
@@ -219,6 +219,6 @@ void ResultScene::menuStopCallback(Ref* pSender)
     //reset banker(players) here
     Banker::getInstance()->resetGame();
     
-    auto wordsScene = StartScene::createScene();
-    Director::getInstance()->replaceScene(wordsScene);
+    auto startScene = StartScene::createScene();
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, startScene));
 }

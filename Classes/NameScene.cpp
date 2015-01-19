@@ -151,7 +151,7 @@ void NameScene::menuStartCallback(Ref* pSender)
     }
     
     auto wordsScene = WordsScene::createScene();
-    Director::getInstance()->replaceScene(wordsScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, wordsScene));
 }
 
 bool NameScene::onTextFieldAttachWithIME(TextFieldTTF *sender)

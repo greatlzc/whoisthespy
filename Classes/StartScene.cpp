@@ -93,5 +93,5 @@ bool StartScene::init()
 void StartScene::menuStartCallback(Ref* pSender)
 {
     auto Rolescene = RoleScene::createScene();
-    Director::getInstance()->replaceScene(Rolescene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, Rolescene));
 }

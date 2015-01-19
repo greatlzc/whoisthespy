@@ -132,7 +132,7 @@ void WordsSceneDefine::menuStartCallback(Ref* pSender)
     WordsManager::getInstance()->addWord(gWord->getString(), sWord->getString());
     Banker::getInstance()->setWords(WordsManager::getInstance()->getWordsbySelect());
     auto playingScene = PlayingScene::createScene();
-    Director::getInstance()->replaceScene(playingScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, playingScene));
 }
 
 bool WordsSceneDefine::onTextFieldAttachWithIME(TextFieldTTF *sender)

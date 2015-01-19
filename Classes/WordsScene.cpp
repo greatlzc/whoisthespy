@@ -93,23 +93,15 @@ bool WordsScene::init()
 void WordsScene::defineCallback(Ref* pSender)
 {
     auto defineScene = WordsSceneDefine::createScene();
-    Director::getInstance()->replaceScene(defineScene);
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, defineScene));
 }
 
 void WordsScene::defaultCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
     //remove last played words
     WordsManager::getInstance()->removeWord(Banker::getInstance()->getWords());
     
     Banker::getInstance()->setWords(WordsManager::getInstance()->getWordsbyRandom());
     auto playingScene = PlayingScene::createScene();
-    Director::getInstance()->replaceScene(playingScene);
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    //exit(0);
-#endif
+    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, playingScene));
 }
