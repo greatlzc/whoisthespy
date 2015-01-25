@@ -45,17 +45,22 @@ bool WordsSceneDefine::init()
     //    you may modify it.
     
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto startItem = MenuItemImage::create(
-                                           "play 2.png",
-                                           "play2 2.png",
-                                           CC_CALLBACK_1(WordsSceneDefine::menuStartCallback, this));
-    startItem->setScale(0.6);
-    startItem->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height/5));
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 70;
+    auto menu_label = Label::createWithTTF(menu_title, "<继续>");
+    menu_label->setColor(Color3B::BLACK);
+    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                 origin.y + visibleSize.height/7));
+    this->addChild(menu_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(70);
+    auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(WordsSceneDefine::menuStartCallback, this));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2::ZERO);
+    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
+                           origin.y + visibleSize.height/7));
     this->addChild(menu, 1);
     
     /////////////////////////////
@@ -64,40 +69,32 @@ bool WordsSceneDefine::init()
     // add a label shows "Hello World"
     // create and initialize a label
     
-    TTFConfig ttf;
-    ttf.fontFilePath = "Abberancy.ttf";
-    ttf.fontSize = 90;
-    auto label = Label::createWithTTF(ttf, "Input the words:");
-    label->setColor(Color3B::YELLOW);
-    // position the label on the center of the screen
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 96;
+    auto label = Label::createWithTTF(title, "输入词语");
+    label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.2));
+                            origin.y + visibleSize.height/1.3));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    // add "StartScene" splash screen"
-//    auto sprite = Sprite::create("sky.jpg");
-//    
-//    // position the sprite on the center of the screen
-//    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//    
-//    // add the sprite as a child to this layer
-//    this->addChild(sprite, 0);
+    TextFieldTTF* guy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入平民词 }", "Arial", 60);
+    guy->setColor(Color3B::BLACK);
+    guy->setPosition(Vec2(origin.x + visibleSize.width/2,
+                             origin.y + visibleSize.height/1.8));
+    guy->setTag(1);
+    guy->setDelegate(this);
+    this->addChild(guy, 2);
     
-    TextFieldTTF* common = TextFieldTTF::textFieldWithPlaceHolder("<点此输入平民词：>", "Arial", 70);
-    common->setPosition(Vec2(origin.x + visibleSize.width/2,
-                             origin.y + visibleSize.height/2));
-    common->setTag(1);
-    common->setDelegate(this);
-    this->addChild(common);
-    
-    TextFieldTTF* spy = TextFieldTTF::textFieldWithPlaceHolder("<点此输入卧底词：>", "Arial", 70);
+    TextFieldTTF* spy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入卧底词 }", "Arial", 60);
+    spy->setColor(Color3B::BLACK);
     spy->setPosition(Vec2(origin.x + visibleSize.width/2,
-                          origin.x + visibleSize.height/2.7));
+                          origin.x + visibleSize.height/2.8));
     spy->setTag(2);
     spy->setDelegate(this);
-    this->addChild(spy);
+    this->addChild(spy, 2);
     
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(70);
@@ -116,6 +113,12 @@ bool WordsSceneDefine::init()
                                   spy->getPositionY()));
     this->addChild(blank_menu2);
     
+    // background image
+    auto sprite = Sprite::create("background.png");
+    
+    // position it on the center of the screen
+    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    this->addChild(sprite, 0);
     //scheduleUpdate();
     return true;
 }

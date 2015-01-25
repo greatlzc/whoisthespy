@@ -34,6 +34,7 @@ Words WordsManager::getWordsbySelect()
 {
     //auto it = --mWordsList.end();
     auto it = mWordsList.end() - 1;
+    mWordsList.pop_back();
     return *it;
 }
 
@@ -96,6 +97,9 @@ void WordsManager::init()
     addWord("人人网", "校内网");
     addWord("威士忌", "白兰地");
     addWord("松下", "索尼");
+    addWord("西域", "西部");
+    addWord("卧底", "间谍");
+    addWord("宁夏", "甘肃");
 }
 
 void WordsManager::addWord(std::string g, std::string s)
@@ -109,6 +113,8 @@ void WordsManager::removeWord(Words word)
     for (auto it = mWordsList.begin(); it != mWordsList.end(); it++) {
         if (it->gWord == word.gWord && it->sWord == word.sWord) {
             mWordsList.erase(it);
+            //in case "it" is the last
+            break;
         }
     }
 }

@@ -45,70 +45,46 @@ bool NameScene::init()
     //    you may modify it.
     
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto startItem = MenuItemImage::create(
-                                           "play 2.png",
-                                           "play2 2.png",
-                                           CC_CALLBACK_1(NameScene::menuStartCallback, this));
-    startItem->setScale(0.6);
-    startItem->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height/4));
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 70;
+    auto menu_label = Label::createWithTTF(menu_title, "<继续>");
+    menu_label->setColor(Color3B::BLACK);
+    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                 origin.y + visibleSize.height/4));
+    this->addChild(menu_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(70);
+    auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(NameScene::menuStartCallback, this));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2::ZERO);
+    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
+                           origin.y + visibleSize.height/4));
     this->addChild(menu, 1);
     
     /////////////////////////////
     // 3. add your codes below...
     
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-//    TTFConfig ttf;
-//    ttf.fontFilePath = "Abberancy.ttf";
-//    ttf.fontSize = 90;
-//    auto label = Label::createWithTTF(ttf, "Type the Names:");
-//    label->setColor(Color3B::YELLOW);
-//    // position the label on the center of the screen
-//    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-//                            origin.y + visibleSize.height/1.5));
-    
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 90;
+    auto label = Label::createWithTTF(title, "输入姓名");
+    label->setColor(Color3B::BLACK);
+    label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                            origin.y + visibleSize.height/1.3));
+    label->setTag(1);
     // add the label as a child to this layer
-    //this->addChild(label, 1);
+    this->addChild(label, 1);
     
-    // add "StartScene" splash screen"
-//    auto sprite = Sprite::create("sky.jpg");
-//    
-//    // position the sprite on the center of the screen
-//    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//    
-//    // add the sprite as a child to this layer
-//    this->addChild(sprite, 0);
-    
-    TextFieldTTF* text = TextFieldTTF::textFieldWithPlaceHolder("<点此输入姓名：>", "Arial", 70);
+    TextFieldTTF* text = TextFieldTTF::textFieldWithPlaceHolder("{ 点击此处输入 }", "FZJingLeiS-R-GB.ttf", 70);
     text->setPosition(Vec2(origin.x + visibleSize.width/2,
                            origin.y + visibleSize.height/2));
-    //text->attachWithIME();
-    //text->setColorSpaceHolder(Color3B::GREEN);
-    text->setTag(1);
+    text->setColor(Color3B::BLACK);
+    text->setColorSpaceHolder(Color3B::BLACK);
+    text->setTag(2);
     text->setDelegate(this);
-    this->addChild(text);
-    
-//    auto touchListener = EventListenerTouchOneByOne::create();
-//    
-//    touchListener->onTouchBegan = [](cocos2d::Touch* touch, cocos2d::Event * event) -> bool {
-//        try {
-//            // Show the on screen keyboard
-//            auto textField = dynamic_cast<TextFieldTTF *>(event->getCurrentTarget());
-//            textField->attachWithIME();
-//            return true;
-//        }
-//        catch(std::bad_cast & err){
-//            return true;
-//        }
-//    };
-//    
-//    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, text);
+    this->addChild(text, 2);
     
     //an invisible menu for the textfield
     MenuItemFont::setFontName("Arial");
@@ -119,20 +95,12 @@ bool NameScene::init()
                                  origin.y + visibleSize.height/2));
     this->addChild(blank_menu);
     
-    int remain = Banker::getInstance()->numSpy +
-    Banker::getInstance()->numGuy +
-    Banker::getInstance()->numLucky -
-    Banker::getInstance()->playerCount();
-    std::stringstream ss;
-    ss<<"还需输入 "<<remain<<" 个";
+    // background image
+    auto sprite = Sprite::create("background.png");
     
-    auto label = LabelTTF::create(ss.str().c_str(), "Arial", 70);
-    //label->setColor(Color3B::YELLOW);
-    
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.5));
-    label->setTag(2);
-    this->addChild(label, 1);
+    // position it on the center of the screen
+    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    this->addChild(sprite, 0);
     
     scheduleUpdate();
     return true;
@@ -169,7 +137,7 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
     //move back
     this->setPosition(Vec2(0, 0));
     
-    auto text = (TextFieldTTF*)this->getChildByTag(1);
+    auto text = (TextFieldTTF*)this->getChildByTag(2);
     Player* newPlayer = new Player(text->getString());
     Banker::getInstance()->addPlayer(newPlayer);
     
@@ -179,7 +147,7 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
 
 void NameScene::textFieldPressed(Ref* pSender)
 {
-    auto text = (TextFieldTTF*)this->getChildByTag(1);
+    auto text = (TextFieldTTF*)this->getChildByTag(2);
     text->attachWithIME();
 }
 
@@ -202,17 +170,15 @@ void NameScene::update(float dt)
     Banker::getInstance()->numLucky -
     Banker::getInstance()->playerCount();
     
-    auto label = (LabelTTF *)this->getChildByTag(2);
-    auto text = (TextFieldTTF*)this->getChildByTag(1);
-    
-    if (remain) {
+    auto text = (Label*)this->getChildByTag(1);
+    auto input = (TextFieldTTF*)this->getChildByTag(2);
+    if (remain && 0 != Banker::getInstance()->playerCount()) {
         std::stringstream ss;
-        ss<<"还需输入 "<<remain<<" 个";
-        label->setString(ss.str().c_str());
+        ss<<"尚需输入 "<<remain<<" 个";
+        text->setString(ss.str().c_str());
     }
-    else {
-        label->setString("输入完成。");
-        text->setString("<点击下一步>");
+    else if (remain == 0) {
+        text->setString("输入完成");
+        input->setString(" ");
     }
-    
 }

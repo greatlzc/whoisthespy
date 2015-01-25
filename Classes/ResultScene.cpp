@@ -44,33 +44,37 @@ bool ResultScene::init()
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
+   
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 64;
+    auto start_label = Label::createWithTTF(menu_title, "<重来>");
+    start_label->setColor(Color3B::BLACK);
+    start_label->setPosition(Vec2(origin.x + visibleSize.width/3,
+                                 origin.y + visibleSize.height/9));
+    this->addChild(start_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(64);
+    auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStartCallback, this));
     
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto startItem = MenuItemImage::create(
-                                           "media-play.png",
-                                           "media-play.png",
-                                           CC_CALLBACK_1(ResultScene::menuStartCallback, this));
-    //startItem->setScale(0.6);
-    startItem->setPosition(Vec2(origin.x + visibleSize.width/3,
-                                origin.y + visibleSize.height/7));
+    auto start_menu = Menu::create(startItem, NULL);
+    start_menu->setPosition(Vec2(origin.x + visibleSize.width/3,
+                           origin.y + visibleSize.height/9));
+    this->addChild(start_menu, 1);
     
-    // create menu, it's an autorelease object
-    auto startmenu = Menu::create(startItem, NULL);
-    startmenu->setPosition(Vec2::ZERO);
-    this->addChild(startmenu, 1);
+    auto stop_label = Label::createWithTTF(menu_title, "<返回>");
+    stop_label->setColor(Color3B::BLACK);
+    stop_label->setPosition(Vec2(origin.x + visibleSize.width*2/3,
+                                 origin.y + visibleSize.height/9));
+    this->addChild(stop_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(64);
+    auto stopItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStopCallback, this));
     
-    auto stopItem = MenuItemImage::create(
-                                           "media-stop.png",
-                                           "media-stop.png",
-                                           CC_CALLBACK_1(ResultScene::menuStopCallback, this));
-    //startItem->setScale(0.6);
-    stopItem->setPosition(Vec2(origin.x + visibleSize.width*2/3,
-                                origin.y + visibleSize.height/7));
-    
-    // create menu, it's an autorelease object
-    auto stopmenu = Menu::create(stopItem, NULL);
-    stopmenu->setPosition(Vec2::ZERO);
-    this->addChild(stopmenu, 1);
+    auto stop_menu = Menu::create(stopItem, NULL);
+    stop_menu->setPosition(Vec2(origin.x + visibleSize.width*2/3,
+                           origin.y + visibleSize.height/9));
+    this->addChild(stop_menu, 1);
     
     /////////////////////////////
     // 3. add your codes below...
@@ -78,13 +82,12 @@ bool ResultScene::init()
     // add a label shows "Hello World"
     // create and initialize a label
     
-//    TTFConfig ttf;
-//    ttf.fontFilePath = "Abberancy.ttf";
-//    ttf.fontSize = 90;
-//    auto label = Label::createWithTTF(ttf, "Rank:");
-//    label->setColor(Color3B::YELLOW);
     // position the label on the center of the screen
-    auto label = Label::create("谁赢了", "Arial", 90);
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 64;
+    
+    auto label = Label::createWithTTF(title, "谁赢了？");
     switch (Banker::getInstance()->GameEnding()) {
         case GUY:
             label->setString("平民赢了！");
@@ -98,29 +101,28 @@ bool ResultScene::init()
         default:
             break;
     }
+    label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height/1.1));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    // add "StartScene" splash screen"
-    auto sprite = Sprite::create("mainbg.png");
+    // background image
+    auto sprite = Sprite::create("background.png");
     
-    // position the sprite on the center of the screen
+    // position it on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    sprite->setScale(1.8);
-    // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
     Banker::getInstance()->accounting(Banker::getInstance()->GameEnding());
     Banker::getInstance()->rankPlayers();
     
-    std::string no1name = "NULL";
-    std::string no2name = "NULL";
-    std::string no3name = "NULL";
-    std::string no4name = "NULL";
-    std::string no5name = "NULL";
+    std::string no1name = "無";
+    std::string no2name = "無";
+    std::string no3name = "無";
+    std::string no4name = "無";
+    std::string no5name = "無";
     
     std::string no1score = "0";
     std::string no2score = "0";
@@ -150,11 +152,15 @@ bool ResultScene::init()
         no1score = std::to_string(Banker::getInstance()->mPlayers.at(0)->mScore);
     }
 
-    auto no1label = Label::create("1." + no1name, "Arial", 70);
-    auto no2label = Label::create("2." + no2name, "Arial", 70);
-    auto no3label = Label::create("3." + no3name, "Arial", 70);
-    auto no4label = Label::create("4." + no4name, "Arial", 70);
-    auto no5label = Label::create("5." + no5name, "Arial", 70);
+    TTFConfig rank;
+    rank.fontFilePath = "FZJingLeiS-R-GB.ttf";
+    rank.fontSize = 64;
+    
+    auto no1label = Label::createWithTTF(rank, "一 " + no1name);
+    auto no2label = Label::createWithTTF(rank, "二 " + no2name);
+    auto no3label = Label::createWithTTF(rank, "三 " + no3name);
+    auto no4label = Label::createWithTTF(rank, "四 " + no4name);
+    auto no5label = Label::createWithTTF(rank, "五 " + no5name);
     
     auto originX = origin.x + visibleSize.width/4;
     auto originY = origin.y + visibleSize.height/1.4;
@@ -173,17 +179,23 @@ bool ResultScene::init()
     no4label->setPosition(Vec2(originX, originY - 3*marginY));
     no5label->setPosition(Vec2(originX, originY - 4*marginY));
     
+    no1label->setColor(Color3B::BLACK);
+    no2label->setColor(Color3B::BLACK);
+    no3label->setColor(Color3B::BLACK);
+    no4label->setColor(Color3B::BLACK);
+    no5label->setColor(Color3B::BLACK);
+    
     this->addChild(no1label);
     this->addChild(no2label);
     this->addChild(no3label);
     this->addChild(no4label);
     this->addChild(no5label);
     
-    auto no1scorelabel = Label::create(no1score, "Arial", 70);
-    auto no2scorelabel = Label::create(no2score, "Arial", 70);
-    auto no3scorelabel = Label::create(no3score, "Arial", 70);
-    auto no4scorelabel = Label::create(no4score, "Arial", 70);
-    auto no5scorelabel = Label::create(no5score, "Arial", 70);
+    auto no1scorelabel = Label::createWithTTF(rank, no1score);
+    auto no2scorelabel = Label::createWithTTF(rank, no2score);
+    auto no3scorelabel = Label::createWithTTF(rank, no3score);
+    auto no4scorelabel = Label::createWithTTF(rank, no4score);
+    auto no5scorelabel = Label::createWithTTF(rank, no5score);
     
     no1scorelabel->setAnchorPoint(Vec2(0, 0));
     no2scorelabel->setAnchorPoint(Vec2(0, 0));
@@ -196,6 +208,12 @@ bool ResultScene::init()
     no3scorelabel->setPosition(Vec2(originX + marginX, originY - 2*marginY));
     no4scorelabel->setPosition(Vec2(originX + marginX, originY - 3*marginY));
     no5scorelabel->setPosition(Vec2(originX + marginX, originY - 4*marginY));
+    
+    no1scorelabel->setColor(Color3B::BLACK);
+    no2scorelabel->setColor(Color3B::BLACK);
+    no3scorelabel->setColor(Color3B::BLACK);
+    no4scorelabel->setColor(Color3B::BLACK);
+    no5scorelabel->setColor(Color3B::BLACK);
     
     this->addChild(no1scorelabel);
     this->addChild(no2scorelabel);

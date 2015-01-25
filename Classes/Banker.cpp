@@ -194,3 +194,36 @@ Words Banker::getWords()
 {
     return Words(mWords.gWord, mWords.sWord);
 }
+
+int Banker::livingGuyCount()
+{
+    int ret = 0;
+    for (Player* p : mPlayers) {
+        if (p->mRole == GUY && p->isDead == false) {
+            ret++;
+        }
+    }
+    return ret;
+}
+
+int Banker::livingSpyCount()
+{
+    int ret = 0;
+    for (Player* p : mPlayers) {
+        if (p->mRole == SPY && p->isDead == false) {
+            ret++;
+        }
+    }
+    return ret;
+}
+
+int Banker::livingLuckyCount()
+{
+    int ret = 0;
+    for (Player* p : mPlayers) {
+        if (p->mRole == LUCKY && p->isDead == false) {
+            ret++;
+        }
+    }
+    return ret;
+}

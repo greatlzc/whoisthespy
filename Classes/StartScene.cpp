@@ -44,17 +44,22 @@ bool StartScene::init()
     //    you may modify it.
     
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto startItem = MenuItemImage::create(
-                                           "play 2.png",
-                                           "play2 2.png",
-                                           CC_CALLBACK_1(StartScene::menuStartCallback, this));
-    startItem->setScale(0.6);
-    startItem->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height/4));
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 70;
+    auto menu_label = Label::createWithTTF(menu_title, "<开始>");
+    menu_label->setColor(Color3B::BLACK);
+    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                 origin.y + visibleSize.height/4));
+    this->addChild(menu_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(70);
+    auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(StartScene::menuStartCallback, this));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2::ZERO);
+    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
+                           origin.y + visibleSize.height/4));
     this->addChild(menu, 1);
     
     /////////////////////////////
@@ -62,12 +67,16 @@ bool StartScene::init()
     
     // add a label shows "Hello World"
     // create and initialize a label
-    TTFConfig ttf;
-    ttf.fontFilePath = "Abberancy.ttf";
-    ttf.fontSize = 90;
-    auto label = Label::createWithTTF(ttf, "Who's the Spy?");
-    label->setColor(Color3B::YELLOW);
+//    auto label = Label::createWithBMFont("start.fnt", "谁是卧底");
+//    //label->setScale(2);
+//    label->setBlendFunc(BlendFunc::ADDITIVE);
+//    label->setColor(Color3B::BLACK);
     // position the label on the center of the screen
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 120;
+    auto label = Label::createWithTTF(title, "谁是卧底？");
+    label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height/1.5));
     
@@ -75,7 +84,7 @@ bool StartScene::init()
     this->addChild(label, 1);
     
     // add "StartScene" splash screen"
-    auto sprite = Sprite::create("sky.jpg");
+    auto sprite = Sprite::create("background.png");
     
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));

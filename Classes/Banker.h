@@ -36,6 +36,9 @@ public:
     int numGuy;
     int numSpy;
     int numLucky;
+    int livingGuyCount();
+    int livingSpyCount();
+    int livingLuckyCount();
     int playerCount();
     void rankPlayers();
     ROLE GameEnding();

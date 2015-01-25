@@ -32,7 +32,9 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fonts/Abberancy.ttf</string>
+		<string>fonts/yuweij.ttf</string>
+		<string>fonts/FZJingLeiS-R-GB.ttf</string>
+		<string>fonts/STLiti.TTF</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>

@@ -41,23 +41,11 @@ bool WordsScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-    
-    // add a "close" icon to exit the progress. it's an autorelease object
-    
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
     TTFConfig ttf;
-    ttf.fontFilePath = "Abberancy.ttf";
+    ttf.fontFilePath = "yuweij.ttf";
     ttf.fontSize = 90;
-    auto label = Label::createWithTTF(ttf, "Select Mode:");
-    label->setColor(Color3B::YELLOW);
+    auto label = Label::createWithTTF(ttf, "选词模式");
+    label->setColor(Color3B::BLACK);
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height/1.5));
@@ -65,26 +53,42 @@ bool WordsScene::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    // add "StartScene" splash screen"
-//    auto sprite = Sprite::create("sky.jpg");
-//    
-//    // position the sprite on the center of the screen
-//    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-//    
-//    // add the sprite as a child to this layer
-//    this->addChild(sprite, 0);
     
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 80;
+    auto define_label = Label::createWithTTF(menu_title, "|自定义|");
+    define_label->setColor(Color3B::BLACK);
+    define_label->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
+    this->addChild(define_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
-    auto define = MenuItemFont::create("自定义", CC_CALLBACK_1(WordsScene::defineCallback, this));
-    auto define_menu = Menu::create(define, NULL);
+    auto defineItem = MenuItemFont::create("          ", CC_CALLBACK_1(WordsScene::defineCallback, this));
+    
+    // create menu, it's an autorelease object
+    auto define_menu = Menu::create(defineItem, NULL);
     define_menu->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
     this->addChild(define_menu, 1);
     
-    auto defaultm = MenuItemFont::create("随机", CC_CALLBACK_1(WordsScene::defaultCallback, this));
-    auto default_menu = Menu::create(defaultm, NULL);
+    auto default_label = Label::createWithTTF(menu_title, "|随机|");
+    default_label->setColor(Color3B::BLACK);
+    default_label->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
+    this->addChild(default_label, 2);
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(80);
+    auto defaultItem = MenuItemFont::create("        ", CC_CALLBACK_1(WordsScene::defaultCallback, this));
+    
+    // create menu, it's an autorelease object
+    auto default_menu = Menu::create(defaultItem, NULL);
     default_menu->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
     this->addChild(default_menu, 1);
+    
+    // background image
+    auto sprite = Sprite::create("background.png");
+    
+    // position it on the center of the screen
+    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    this->addChild(sprite, 0);
     
     return true;
 }
