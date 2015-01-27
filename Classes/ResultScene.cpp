@@ -10,6 +10,7 @@
 #include "Banker.h"
 #include "WordsScene.h"
 #include "StartScene.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -47,33 +48,33 @@ bool ResultScene::init()
    
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 64;
+    menu_title.fontSize = 56;
     auto start_label = Label::createWithTTF(menu_title, "<重来>");
     start_label->setColor(Color3B::BLACK);
-    start_label->setPosition(Vec2(origin.x + visibleSize.width/3,
-                                 origin.y + visibleSize.height/9));
+    start_label->setPosition(Vec2(origin.x + start_label->getContentSize().width/2,
+                                 origin.y + visibleSize.height/10));
     this->addChild(start_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(64);
+    MenuItemFont::setFontSize(56);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStartCallback, this));
     
     auto start_menu = Menu::create(startItem, NULL);
-    start_menu->setPosition(Vec2(origin.x + visibleSize.width/3,
-                           origin.y + visibleSize.height/9));
+    start_menu->setPosition(Vec2(origin.x + start_label->getContentSize().width/2,
+                           origin.y + visibleSize.height/10));
     this->addChild(start_menu, 1);
     
     auto stop_label = Label::createWithTTF(menu_title, "<返回>");
     stop_label->setColor(Color3B::BLACK);
-    stop_label->setPosition(Vec2(origin.x + visibleSize.width*2/3,
-                                 origin.y + visibleSize.height/9));
+    stop_label->setPosition(Vec2(origin.x + visibleSize.width - stop_label->getContentSize().width/2,
+                                 origin.y + visibleSize.height/10));
     this->addChild(stop_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(64);
+    MenuItemFont::setFontSize(56);
     auto stopItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStopCallback, this));
     
     auto stop_menu = Menu::create(stopItem, NULL);
-    stop_menu->setPosition(Vec2(origin.x + visibleSize.width*2/3,
-                           origin.y + visibleSize.height/9));
+    stop_menu->setPosition(Vec2(origin.x + visibleSize.width - stop_label->getContentSize().width/2,
+                           origin.y + visibleSize.height/10));
     this->addChild(stop_menu, 1);
     
     /////////////////////////////
@@ -85,7 +86,7 @@ bool ResultScene::init()
     // position the label on the center of the screen
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
-    title.fontSize = 64;
+    title.fontSize = 90;
     
     auto label = Label::createWithTTF(title, "谁赢了？");
     switch (Banker::getInstance()->GameEnding()) {
@@ -103,7 +104,7 @@ bool ResultScene::init()
     }
     label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.1));
+                            origin.y + visibleSize.height/1.2));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
@@ -163,7 +164,7 @@ bool ResultScene::init()
     auto no5label = Label::createWithTTF(rank, "五 " + no5name);
     
     auto originX = origin.x + visibleSize.width/4;
-    auto originY = origin.y + visibleSize.height/1.4;
+    auto originY = origin.y + visibleSize.height/1.7;
     auto marginX = visibleSize.width/2.5;
     auto marginY = no1label->getContentSize().height;
     
@@ -221,6 +222,8 @@ bool ResultScene::init()
     this->addChild(no4scorelabel);
     this->addChild(no5scorelabel);
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    
     return true;
 }
 
@@ -229,6 +232,7 @@ void ResultScene::menuStartCallback(Ref* pSender)
 {
     //to do
     auto wordsScene = WordsScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, wordsScene));
 }
 
@@ -238,5 +242,6 @@ void ResultScene::menuStopCallback(Ref* pSender)
     Banker::getInstance()->resetGame();
     
     auto startScene = StartScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, startScene));
 }

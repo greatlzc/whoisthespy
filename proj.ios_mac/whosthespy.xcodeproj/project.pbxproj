@@ -26,6 +26,9 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		3C44006F1A74BF6100876D7B /* FZJingLeiS-R-GB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C44006E1A74BF6100876D7B /* FZJingLeiS-R-GB.ttf */; };
 		3C4400771A74CB8700876D7B /* yuweij.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4400761A74CB8700876D7B /* yuweij.ttf */; };
+		3C4400811A77E20000876D7B /* button-28.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C4400801A77E1FF00876D7B /* button-28.wav */; };
+		3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */; };
+		3C4F368C1A77F12100E4C35D /* contra.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F368B1A77F12100E4C35D /* contra.m4a */; };
 		3C9E937D1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937E1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937F1A6FFD7E00567EA5 /* name.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93721A6FFD7E00567EA5 /* name.fnt */; };
@@ -288,6 +291,9 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3C44006E1A74BF6100876D7B /* FZJingLeiS-R-GB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZJingLeiS-R-GB.ttf"; sourceTree = "<group>"; };
 		3C4400761A74CB8700876D7B /* yuweij.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yuweij.ttf; sourceTree = "<group>"; };
+		3C4400801A77E1FF00876D7B /* button-28.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "button-28.wav"; sourceTree = "<group>"; };
+		3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Mario Bros.mp3"; sourceTree = "<group>"; };
+		3C4F368B1A77F12100E4C35D /* contra.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = contra.m4a; sourceTree = "<group>"; };
 		3C9E93711A6FFD7E00567EA5 /* name_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = name_0.png; sourceTree = "<group>"; };
 		3C9E93721A6FFD7E00567EA5 /* name.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name.fnt; sourceTree = "<group>"; };
 		3C9E93731A6FFD7E00567EA5 /* other_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other_0.png; sourceTree = "<group>"; };
@@ -616,6 +622,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3C4F368B1A77F12100E4C35D /* contra.m4a */,
+				3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */,
+				3C4400801A77E1FF00876D7B /* button-28.wav */,
 				3C9E939D1A713ADC00567EA5 /* background.png */,
 				3CF4F8451A62558800D5E2E4 /* rank.png */,
 				3CF4F8421A61946C00D5E2E4 /* dead.png */,
@@ -798,11 +807,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				3C4400811A77E20000876D7B /* button-28.wav in Resources */,
 				3CC6F45C1A406EE80090A4FC /* mainbg.png in Resources */,
 				3CE7F4031A3738C000F9F38C /* sky.jpg in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				3CECD5AF1A6EBC3200BCD12C /* start.fnt in Resources */,
+				3C4F368C1A77F12100E4C35D /* contra.m4a in Resources */,
+				3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */,
 				3C9E93911A6FFD7E00567EA5 /* word_0.png in Resources */,
 				3CF4F8411A61616A00D5E2E4 /* forgot.png in Resources */,
 				3C9E938D1A6FFD7E00567EA5 /* role_0.png in Resources */,

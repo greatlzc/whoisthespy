@@ -9,6 +9,7 @@
 #include "PlayingScene.h"
 #include "ResultScene.h"
 #include "Banker.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -119,6 +120,8 @@ bool PlayingScene::init()
         pMenu->setTag(i + 10);
         this->addChild(pMenu, 1);
     }
+    
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Super Mario Bros.mp3");
     
     scheduleUpdate();
     return true;
@@ -354,6 +357,7 @@ void PlayingScene::update(float dt)
     //check if game is ending per second
     if (isGameEnded) {
         auto resultScene = ResultScene::createScene();
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Super Mario Bros.mp3");
         Director::getInstance()->replaceScene(resultScene);
     }
 }

@@ -8,6 +8,7 @@
 
 #include "StartScene.h"
 #include "RoleScene.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -95,6 +96,11 @@ bool StartScene::init()
     //reset word here
     WordsManager::getInstance()->init();
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra.m4a");
+    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    
+    //CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra.m4a");
+    
     return true;
 }
 
@@ -102,5 +108,7 @@ bool StartScene::init()
 void StartScene::menuStartCallback(Ref* pSender)
 {
     auto Rolescene = RoleScene::createScene();
+    //CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+    //CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, Rolescene));
 }

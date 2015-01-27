@@ -10,6 +10,7 @@
 #include "PlayingScene.h"
 #include "WordsSceneDefine.h"
 #include "Banker.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -90,6 +91,8 @@ bool WordsScene::init()
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(sprite, 0);
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    
     return true;
 }
 
@@ -97,6 +100,7 @@ bool WordsScene::init()
 void WordsScene::defineCallback(Ref* pSender)
 {
     auto defineScene = WordsSceneDefine::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, defineScene));
 }
 
@@ -107,5 +111,6 @@ void WordsScene::defaultCallback(Ref* pSender)
     
     Banker::getInstance()->setWords(WordsManager::getInstance()->getWordsbyRandom());
     auto playingScene = PlayingScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, playingScene));
 }

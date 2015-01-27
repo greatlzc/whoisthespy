@@ -9,6 +9,7 @@
 #include "NameScene.h"
 #include "WordsScene.h"
 #include "Banker.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -102,6 +103,8 @@ bool NameScene::init()
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     this->addChild(sprite, 0);
     
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    
     scheduleUpdate();
     return true;
 }
@@ -119,6 +122,7 @@ void NameScene::menuStartCallback(Ref* pSender)
     }
     
     auto wordsScene = WordsScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, wordsScene));
 }
 
