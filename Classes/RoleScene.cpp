@@ -9,6 +9,7 @@
 #include "RoleScene.h"
 #include "NameScene.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -36,22 +37,14 @@ bool RoleScene::init()
     {
         return false;
     }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-    
-    // add a "close" icon to exit the progress. it's an autorelease object
+
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
     menu_title.fontSize = 70;
     auto menu_label = Label::createWithTTF(menu_title, "<继续>");
     menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height/6));
+    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                                 ORIGIN_Y + HEIGHT/7));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(70);
@@ -59,15 +52,9 @@ bool RoleScene::init()
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
-                           origin.y + visibleSize.height/6));
+    menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                           ORIGIN_Y + HEIGHT/7));
     this->addChild(menu, 1);
-    
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
     
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
@@ -75,32 +62,30 @@ bool RoleScene::init()
     auto label = Label::createWithTTF(title, "选择角色");
     label->setColor(Color3B::BLACK);
     // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.2));
+    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                            ORIGIN_Y + HEIGHT/1.2));
     
     // add the label as a child to this layer
     //label->setOpacity(0);
     this->addChild(label, 1);
     
-//    TTFConfig title;
-//    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
     title.fontSize = 76;
     auto guy = Label::createWithTTF(title, "平民   ");
     guy->setColor(Color3B::BLACK);
-    guy->setPosition(Vec2(origin.x + visibleSize.width/2.5,
-                             origin.y + visibleSize.height/1.5));
+    guy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+                             ORIGIN_Y + HEIGHT/1.5));
     this->addChild(guy, 1);
     
     auto spy = Label::createWithTTF(title, "卧底   ");
     spy->setColor(Color3B::BLACK);
-    spy->setPosition(Vec2(origin.x + visibleSize.width/2.5,
-                          origin.y + visibleSize.height/2));
+    spy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+                          ORIGIN_Y + HEIGHT/2));
     this->addChild(spy, 1);
     
     auto lucky = Label::createWithTTF(title, "白板   ");
     lucky->setColor(Color3B::BLACK);
-    lucky->setPosition(Vec2(origin.x + visibleSize.width/2.5,
-                              origin.y + visibleSize.height/3));
+    lucky->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+                              ORIGIN_Y + HEIGHT/3));
     this->addChild(lucky, 1);
     
     //平民 number selector
@@ -176,7 +161,7 @@ bool RoleScene::init()
     auto sprite = Sprite::create("background.png");
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");

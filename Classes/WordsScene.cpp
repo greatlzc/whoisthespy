@@ -11,6 +11,7 @@
 #include "WordsSceneDefine.h"
 #include "Banker.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -48,12 +49,11 @@ bool WordsScene::init()
     auto label = Label::createWithTTF(ttf, "选词模式");
     label->setColor(Color3B::BLACK);
     // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.5));
+    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                            ORIGIN_Y + HEIGHT/1.5));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
-    
     
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
@@ -88,7 +88,7 @@ bool WordsScene::init()
     auto sprite = Sprite::create("background.png");
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");

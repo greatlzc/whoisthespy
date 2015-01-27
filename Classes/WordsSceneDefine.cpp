@@ -10,6 +10,7 @@
 #include "Banker.h"
 #include "PlayingScene.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -41,18 +42,13 @@ bool WordsSceneDefine::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-    
-    // add a "close" icon to exit the progress. it's an autorelease object
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
     menu_title.fontSize = 70;
     auto menu_label = Label::createWithTTF(menu_title, "<继续>");
     menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height/7));
+    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                                 ORIGIN_Y + HEIGHT/7));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(70);
@@ -60,39 +56,33 @@ bool WordsSceneDefine::init()
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
-                           origin.y + visibleSize.height/7));
+    menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                           ORIGIN_Y + HEIGHT/7));
     this->addChild(menu, 1);
-    
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
     
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 96;
     auto label = Label::createWithTTF(title, "输入词语");
     label->setColor(Color3B::BLACK);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.3));
+    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                            ORIGIN_Y + HEIGHT/1.3));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
     
     TextFieldTTF* guy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入平民词 }", "Arial", 60);
     guy->setColor(Color3B::BLACK);
-    guy->setPosition(Vec2(origin.x + visibleSize.width/2,
-                             origin.y + visibleSize.height/1.8));
+    guy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                             ORIGIN_Y + HEIGHT/1.8));
     guy->setTag(1);
     guy->setDelegate(this);
     this->addChild(guy, 2);
     
     TextFieldTTF* spy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入卧底词 }", "Arial", 60);
     spy->setColor(Color3B::BLACK);
-    spy->setPosition(Vec2(origin.x + visibleSize.width/2,
-                          origin.x + visibleSize.height/2.8));
+    spy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                          ORIGIN_X + HEIGHT/2.8));
     spy->setTag(2);
     spy->setDelegate(this);
     this->addChild(spy, 2);
@@ -103,14 +93,14 @@ bool WordsSceneDefine::init()
     //invisible menu for 平民 word
     auto blank1 = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 1));
     auto blank_menu1 = Menu::create(blank1, NULL);
-    blank_menu1->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height/2));
+    blank_menu1->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                                 ORIGIN_Y + HEIGHT/2));
     this->addChild(blank_menu1);
     
     //invisible menu for 卧底 word
     auto blank2 = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 2));
     auto blank_menu2 = Menu::create(blank2, NULL);
-    blank_menu2->setPosition(Vec2(origin.x + visibleSize.width/2,
+    blank_menu2->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                   spy->getPositionY()));
     this->addChild(blank_menu2);
     
@@ -118,7 +108,7 @@ bool WordsSceneDefine::init()
     auto sprite = Sprite::create("background.png");
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");

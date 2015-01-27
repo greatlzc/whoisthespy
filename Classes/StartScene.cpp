@@ -9,6 +9,7 @@
 #include "StartScene.h"
 #include "RoleScene.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -36,22 +37,14 @@ bool StartScene::init()
     {
         return false;
     }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-    
-    // add a "close" icon to exit the progress. it's an autorelease object
+
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
     menu_title.fontSize = 70;
     auto menu_label = Label::createWithTTF(menu_title, "<开始>");
     menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                 origin.y + visibleSize.height/4));
+    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                                 ORIGIN_Y + HEIGHT/4));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(70);
@@ -59,27 +52,17 @@ bool StartScene::init()
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
-    menu->setPosition(Vec2(origin.x + visibleSize.width/2,
-                           origin.y + visibleSize.height/4));
+    menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                           ORIGIN_Y + HEIGHT/4));
     this->addChild(menu, 1);
     
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
-//    auto label = Label::createWithBMFont("start.fnt", "谁是卧底");
-//    //label->setScale(2);
-//    label->setBlendFunc(BlendFunc::ADDITIVE);
-//    label->setColor(Color3B::BLACK);
-    // position the label on the center of the screen
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 120;
     auto label = Label::createWithTTF(title, "谁是卧底？");
     label->setColor(Color3B::BLACK);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.5));
+    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                            ORIGIN_Y + HEIGHT/1.5));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
@@ -88,7 +71,7 @@ bool StartScene::init()
     auto sprite = Sprite::create("background.png");
     
     // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);

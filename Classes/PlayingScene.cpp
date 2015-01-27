@@ -10,6 +10,7 @@
 #include "ResultScene.h"
 #include "Banker.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -45,7 +46,7 @@ bool PlayingScene::init()
     auto sprite = Sprite::create("background.png");
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     sprite->setTag(-4);
     this->addChild(sprite, 0);
     
@@ -54,31 +55,31 @@ bool PlayingScene::init()
     menu_title.fontSize = 60;
     auto forgot_label = Label::createWithTTF(menu_title, "<看词>");
     forgot_label->setColor(Color3B::BLACK);
-    forgot_label->setPosition(Vec2(origin.x + visibleSize.width/3,
-                                  origin.y + visibleSize.height/7));
+    forgot_label->setPosition(Vec2(ORIGIN_X + WIDTH/3,
+                                  ORIGIN_Y + HEIGHT/7));
     this->addChild(forgot_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(60);
     auto forgotItem = MenuItemFont::create("       ", CC_CALLBACK_1(PlayingScene::OnForgotWord, this));
     
     auto forgot_menu = Menu::create(forgotItem, NULL);
-    forgot_menu->setPosition(Vec2(origin.x + visibleSize.width/3,
-                                 origin.y + visibleSize.height/7));
+    forgot_menu->setPosition(Vec2(ORIGIN_X + WIDTH/3,
+                                 ORIGIN_Y + HEIGHT/7));
     forgot_menu->setTag(-2);
     this->addChild(forgot_menu, 1);
     
     auto kill_label = Label::createWithTTF(menu_title, "<投之>");
     kill_label->setColor(Color3B::BLACK);
-    kill_label->setPosition(Vec2(origin.x + visibleSize.width*2/3,
-                                 origin.y + visibleSize.height/7));
+    kill_label->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
+                                 ORIGIN_Y + HEIGHT/7));
     this->addChild(kill_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(60);
     auto killItem = MenuItemFont::create("       ", CC_CALLBACK_1(PlayingScene::OnKillPlayer, this));
     
     auto kill_menu = Menu::create(killItem, NULL);
-    kill_menu->setPosition(Vec2(origin.x + visibleSize.width*2/3,
-                                origin.y + visibleSize.height/7));
+    kill_menu->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
+                                ORIGIN_Y + HEIGHT/7));
     kill_menu->setTag(-3);
     this->addChild(kill_menu, 1);
     
@@ -87,9 +88,9 @@ bool PlayingScene::init()
     Banker::getInstance()->shuffle();
     
     auto sample = Label::create("sample", "Arial", 60);
-    auto originX = origin.x + visibleSize.width/6;
-    auto originY = origin.y + visibleSize.height/1.4;
-    auto marginX = visibleSize.width/3;
+    auto originX = ORIGIN_X + WIDTH/6;
+    auto originY = ORIGIN_Y + HEIGHT/1.4;
+    auto marginX = WIDTH/3;
     auto marginY = sample->getContentSize().height*2;
     
     MenuItemFont::setFontName("Arial");
@@ -164,7 +165,7 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     forgotten->setScale(1.5);
-    forgotten->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+    forgotten->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     
     auto pName = Banker::getInstance()->mPlayers.at(mPlayerSelected)->mName;
     std::string pWord = Banker::getInstance()->getWordbyName(pName);
@@ -174,7 +175,7 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     title.fontSize = 50;
     
     auto word = Label::createWithTTF(title, pWord);
-    word->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+    word->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     word->setColor(Color3B::BLACK);
     this->addChild(word, 4);
     this->addChild(forgotten, 3);
@@ -276,17 +277,17 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     info->setColor(Color3B::BLACK);
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    info->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/1.1));
+    info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
     this->addChild(info);
     
     auto resultbg = Sprite::create("rank.png");
     resultbg->setScale(1.5);
-    resultbg->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+    resultbg->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     this->addChild(resultbg, 3);
     
     auto result = Label::createWithTTF(title, "死者身份是……");
     result->setColor(Color3B::BLACK);
-    result->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+    result->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     this->addChild(result, 4);
     
     //voting result will show, touch to return, this may lead to next scene

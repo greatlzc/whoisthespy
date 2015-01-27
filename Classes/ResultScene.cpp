@@ -11,6 +11,7 @@
 #include "WordsScene.h"
 #include "StartScene.h"
 #include "SimpleAudioEngine.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -38,52 +39,38 @@ bool ResultScene::init()
     {
         return false;
     }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
    
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
     menu_title.fontSize = 56;
     auto start_label = Label::createWithTTF(menu_title, "<重来>");
     start_label->setColor(Color3B::BLACK);
-    start_label->setPosition(Vec2(origin.x + start_label->getContentSize().width/2,
-                                 origin.y + visibleSize.height/10));
+    start_label->setPosition(Vec2(ORIGIN_X + start_label->getContentSize().width/2,
+                                 ORIGIN_Y + HEIGHT/10));
     this->addChild(start_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(56);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStartCallback, this));
     
     auto start_menu = Menu::create(startItem, NULL);
-    start_menu->setPosition(Vec2(origin.x + start_label->getContentSize().width/2,
-                           origin.y + visibleSize.height/10));
+    start_menu->setPosition(Vec2(ORIGIN_X + start_label->getContentSize().width/2,
+                           ORIGIN_Y + HEIGHT/10));
     this->addChild(start_menu, 1);
     
     auto stop_label = Label::createWithTTF(menu_title, "<返回>");
     stop_label->setColor(Color3B::BLACK);
-    stop_label->setPosition(Vec2(origin.x + visibleSize.width - stop_label->getContentSize().width/2,
-                                 origin.y + visibleSize.height/10));
+    stop_label->setPosition(Vec2(ORIGIN_X + WIDTH - stop_label->getContentSize().width/2,
+                                 ORIGIN_Y + HEIGHT/10));
     this->addChild(stop_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(56);
     auto stopItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStopCallback, this));
     
     auto stop_menu = Menu::create(stopItem, NULL);
-    stop_menu->setPosition(Vec2(origin.x + visibleSize.width - stop_label->getContentSize().width/2,
-                           origin.y + visibleSize.height/10));
+    stop_menu->setPosition(Vec2(ORIGIN_X + WIDTH - stop_label->getContentSize().width/2,
+                           ORIGIN_Y + HEIGHT/10));
     this->addChild(stop_menu, 1);
     
-    /////////////////////////////
-    // 3. add your codes below...
-    
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    // position the label on the center of the screen
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 90;
@@ -103,8 +90,8 @@ bool ResultScene::init()
             break;
     }
     label->setColor(Color3B::BLACK);
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height/1.2));
+    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+                            ORIGIN_Y + HEIGHT/1.2));
     
     // add the label as a child to this layer
     this->addChild(label, 1);
@@ -113,7 +100,7 @@ bool ResultScene::init()
     auto sprite = Sprite::create("background.png");
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
     Banker::getInstance()->accounting(Banker::getInstance()->GameEnding());
@@ -163,9 +150,9 @@ bool ResultScene::init()
     auto no4label = Label::createWithTTF(rank, "四 " + no4name);
     auto no5label = Label::createWithTTF(rank, "五 " + no5name);
     
-    auto originX = origin.x + visibleSize.width/4;
-    auto originY = origin.y + visibleSize.height/1.7;
-    auto marginX = visibleSize.width/2.5;
+    auto originX = ORIGIN_X + WIDTH/4;
+    auto originY = ORIGIN_Y + HEIGHT/1.7;
+    auto marginX = WIDTH/2.5;
     auto marginY = no1label->getContentSize().height;
     
     no1label->setAnchorPoint(Vec2(0, 0));

@@ -29,6 +29,8 @@
 		3C4400811A77E20000876D7B /* button-28.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C4400801A77E1FF00876D7B /* button-28.wav */; };
 		3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */; };
 		3C4F368C1A77F12100E4C35D /* contra.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F368B1A77F12100E4C35D /* contra.m4a */; };
+		3C4F368F1A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
+		3C4F36901A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
 		3C9E937D1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937E1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937F1A6FFD7E00567EA5 /* name.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93721A6FFD7E00567EA5 /* name.fnt */; };
@@ -294,6 +296,8 @@
 		3C4400801A77E1FF00876D7B /* button-28.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "button-28.wav"; sourceTree = "<group>"; };
 		3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Mario Bros.mp3"; sourceTree = "<group>"; };
 		3C4F368B1A77F12100E4C35D /* contra.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = contra.m4a; sourceTree = "<group>"; };
+		3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameUtils.cpp; path = ../Classes/GameUtils.cpp; sourceTree = "<group>"; };
+		3C4F368E1A77FA1900E4C35D /* GameUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameUtils.h; path = ../Classes/GameUtils.h; sourceTree = "<group>"; };
 		3C9E93711A6FFD7E00567EA5 /* name_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = name_0.png; sourceTree = "<group>"; };
 		3C9E93721A6FFD7E00567EA5 /* name.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name.fnt; sourceTree = "<group>"; };
 		3C9E93731A6FFD7E00567EA5 /* other_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other_0.png; sourceTree = "<group>"; };
@@ -570,6 +574,8 @@
 				3CC43CCE1A41D8F200F587C4 /* Banker.h */,
 				3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */,
 				3CF8D7E81A4320670073EAC4 /* WordsManager.h */,
+				3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */,
+				3C4F368E1A77FA1900E4C35D /* GameUtils.h */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -898,6 +904,7 @@
 				3CC6F43B1A3F400B0090A4FC /* StartScene.cpp in Sources */,
 				3CCC37A31A599974004C3598 /* WordsSceneDefine.cpp in Sources */,
 				3CC6F44B1A3F40D10090A4FC /* PlayingScene.cpp in Sources */,
+				3C4F368F1A77FA1900E4C35D /* GameUtils.cpp in Sources */,
 				3CC43CCF1A41D8F200F587C4 /* Banker.cpp in Sources */,
 				3CF8D7E91A4320670073EAC4 /* WordsManager.cpp in Sources */,
 				3CC6F43F1A3F405D0090A4FC /* RoleScene.cpp in Sources */,
@@ -924,6 +931,7 @@
 				3CC6F43C1A3F400B0090A4FC /* StartScene.cpp in Sources */,
 				3CC6F4441A3F40930090A4FC /* NameScene.cpp in Sources */,
 				3CC6F4501A3F40E90090A4FC /* ResultScene.cpp in Sources */,
+				3C4F36901A77FA1900E4C35D /* GameUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
