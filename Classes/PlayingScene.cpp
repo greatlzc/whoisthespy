@@ -173,8 +173,8 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     auto word = Label::createWithTTF(title, pWord);
     word->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
     word->setColor(Color3B::BLACK);
-    this->addChild(word, 2);
-    this->addChild(forgotten, 1);
+    this->addChild(word, 4);
+    this->addChild(forgotten, 3);
 
     //forgotten word will show, touch to return
     auto touchListener = EventListenerTouchOneByOne::create();
@@ -279,12 +279,12 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     auto resultbg = Sprite::create("rank.png");
     resultbg->setScale(1.5);
     resultbg->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
-    this->addChild(resultbg);
+    this->addChild(resultbg, 3);
     
     auto result = Label::createWithTTF(title, "死者身份是……");
     result->setColor(Color3B::BLACK);
     result->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
-    this->addChild(result);
+    this->addChild(result, 4);
     
     //voting result will show, touch to return, this may lead to next scene
     auto touchListener = EventListenerTouchOneByOne::create();
