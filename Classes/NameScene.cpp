@@ -39,9 +39,6 @@ bool NameScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
     TTFConfig menu_title;
     menu_title.fontFilePath = "yuweij.ttf";
     menu_title.fontSize = 70;
@@ -51,7 +48,7 @@ bool NameScene::init()
                                  ORIGIN_Y + HEIGHT/4));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(70);
+    MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(NameScene::menuStartCallback, this));
     
     // create menu, it's an autorelease object
@@ -63,7 +60,7 @@ bool NameScene::init()
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 90;
-    auto label = Label::createWithTTF(title, "输入姓名");
+    auto label = Label::createWithTTF(title, "依次输入姓名");
     label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                             ORIGIN_Y + HEIGHT/1.3));

@@ -40,9 +40,6 @@ bool WordsScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
     TTFConfig ttf;
     ttf.fontFilePath = "yuweij.ttf";
     ttf.fontSize = 90;
@@ -63,7 +60,7 @@ bool WordsScene::init()
     define_label->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
     this->addChild(define_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(80);
+    MenuItemFont::setFontSize(90);
     auto defineItem = MenuItemFont::create("          ", CC_CALLBACK_1(WordsScene::defineCallback, this));
     
     // create menu, it's an autorelease object
@@ -76,7 +73,7 @@ bool WordsScene::init()
     default_label->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
     this->addChild(default_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(80);
+    MenuItemFont::setFontSize(90);
     auto defaultItem = MenuItemFont::create("        ", CC_CALLBACK_1(WordsScene::defaultCallback, this));
     
     // create menu, it's an autorelease object

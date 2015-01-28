@@ -28,7 +28,6 @@
 		3C4400771A74CB8700876D7B /* yuweij.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4400761A74CB8700876D7B /* yuweij.ttf */; };
 		3C4400811A77E20000876D7B /* button-28.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3C4400801A77E1FF00876D7B /* button-28.wav */; };
 		3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */; };
-		3C4F368C1A77F12100E4C35D /* contra.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F368B1A77F12100E4C35D /* contra.m4a */; };
 		3C4F368F1A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
 		3C4F36901A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
 		3C9E937D1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
@@ -59,6 +58,10 @@
 		3C9E93991A7005C900567EA5 /* STLiti.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93971A7005C900567EA5 /* STLiti.TTF */; };
 		3C9E939E1A713ADC00567EA5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E939D1A713ADC00567EA5 /* background.png */; };
 		3C9E939F1A713ADC00567EA5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E939D1A713ADC00567EA5 /* background.png */; };
+		3CB010F11A7948E500DFB268 /* contra_title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CB010F01A7948E500DFB268 /* contra_title.mp3 */; };
+		3CB010F21A7948E500DFB268 /* contra_title.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CB010F01A7948E500DFB268 /* contra_title.mp3 */; };
+		3CB010F41A794AD200DFB268 /* button-30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CB010F31A794AD200DFB268 /* button-30.mp3 */; };
+		3CB010F51A794AD200DFB268 /* button-30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CB010F31A794AD200DFB268 /* button-30.mp3 */; };
 		3CC43CCF1A41D8F200F587C4 /* Banker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CC43CCD1A41D8F200F587C4 /* Banker.cpp */; };
 		3CC43CD01A41D8F200F587C4 /* Banker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CC43CCD1A41D8F200F587C4 /* Banker.cpp */; };
 		3CC6F43B1A3F400B0090A4FC /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6F4391A3F400B0090A4FC /* StartScene.cpp */; };
@@ -295,7 +298,6 @@
 		3C4400761A74CB8700876D7B /* yuweij.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yuweij.ttf; sourceTree = "<group>"; };
 		3C4400801A77E1FF00876D7B /* button-28.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "button-28.wav"; sourceTree = "<group>"; };
 		3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Mario Bros.mp3"; sourceTree = "<group>"; };
-		3C4F368B1A77F12100E4C35D /* contra.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = contra.m4a; sourceTree = "<group>"; };
 		3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameUtils.cpp; path = ../Classes/GameUtils.cpp; sourceTree = "<group>"; };
 		3C4F368E1A77FA1900E4C35D /* GameUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameUtils.h; path = ../Classes/GameUtils.h; sourceTree = "<group>"; };
 		3C9E93711A6FFD7E00567EA5 /* name_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = name_0.png; sourceTree = "<group>"; };
@@ -312,6 +314,8 @@
 		3C9E937C1A6FFD7E00567EA5 /* word.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = word.txt; sourceTree = "<group>"; };
 		3C9E93971A7005C900567EA5 /* STLiti.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = STLiti.TTF; sourceTree = "<group>"; };
 		3C9E939D1A713ADC00567EA5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		3CB010F01A7948E500DFB268 /* contra_title.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = contra_title.mp3; sourceTree = "<group>"; };
+		3CB010F31A794AD200DFB268 /* button-30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-30.mp3"; sourceTree = "<group>"; };
 		3CC43CCD1A41D8F200F587C4 /* Banker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Banker.cpp; path = ../Classes/Banker.cpp; sourceTree = "<group>"; };
 		3CC43CCE1A41D8F200F587C4 /* Banker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Banker.h; path = ../Classes/Banker.h; sourceTree = "<group>"; };
 		3CC6F4391A3F400B0090A4FC /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StartScene.cpp; path = ../Classes/StartScene.cpp; sourceTree = "<group>"; };
@@ -628,7 +632,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3C4F368B1A77F12100E4C35D /* contra.m4a */,
+				3CB010F31A794AD200DFB268 /* button-30.mp3 */,
+				3CB010F01A7948E500DFB268 /* contra_title.mp3 */,
 				3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */,
 				3C4400801A77E1FF00876D7B /* button-28.wav */,
 				3C9E939D1A713ADC00567EA5 /* background.png */,
@@ -819,7 +824,7 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				3CECD5AF1A6EBC3200BCD12C /* start.fnt in Resources */,
-				3C4F368C1A77F12100E4C35D /* contra.m4a in Resources */,
+				3CB010F41A794AD200DFB268 /* button-30.mp3 in Resources */,
 				3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */,
 				3C9E93911A6FFD7E00567EA5 /* word_0.png in Resources */,
 				3CF4F8411A61616A00D5E2E4 /* forgot.png in Resources */,
@@ -849,6 +854,7 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				3CECD5AD1A6EBC3200BCD12C /* start_0.png in Resources */,
 				3C9E937F1A6FFD7E00567EA5 /* name.fnt in Resources */,
+				3CB010F11A7948E500DFB268 /* contra_title.mp3 in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
@@ -870,8 +876,10 @@
 				3C9E93991A7005C900567EA5 /* STLiti.TTF in Resources */,
 				5087E75317EB910900C73F5D /* CloseNormal.png in Resources */,
 				3C9E93881A6FFD7E00567EA5 /* play.fnt in Resources */,
+				3CB010F21A7948E500DFB268 /* contra_title.mp3 in Resources */,
 				3C9E93901A6FFD7E00567EA5 /* role.fnt in Resources */,
 				3C9E93921A6FFD7E00567EA5 /* word_0.png in Resources */,
+				3CB010F51A794AD200DFB268 /* button-30.mp3 in Resources */,
 				3C9E937E1A6FFD7E00567EA5 /* name_0.png in Resources */,
 				3CECD5B01A6EBC3200BCD12C /* start.fnt in Resources */,
 				3CECD5AE1A6EBC3200BCD12C /* start_0.png in Resources */,

@@ -28,7 +28,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = StartScene::createScene();
-
+    
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra_title.mp3");
     // run
     director->runWithScene(scene);
 

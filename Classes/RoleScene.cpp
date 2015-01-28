@@ -44,22 +44,22 @@ bool RoleScene::init()
     auto menu_label = Label::createWithTTF(menu_title, "<继续>");
     menu_label->setColor(Color3B::BLACK);
     menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
-                                 ORIGIN_Y + HEIGHT/7));
+                                 ORIGIN_Y + HEIGHT/8));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(70);
+    MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(RoleScene::menuStartCallback, this));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
     menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
-                           ORIGIN_Y + HEIGHT/7));
+                           ORIGIN_Y + HEIGHT/8));
     this->addChild(menu, 1);
     
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 90;
-    auto label = Label::createWithTTF(title, "选择角色");
+    auto label = Label::createWithTTF(title, "选择角色及其人数");
     label->setColor(Color3B::BLACK);
     // position the label on the center of the screen
     label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
@@ -73,19 +73,19 @@ bool RoleScene::init()
     auto guy = Label::createWithTTF(title, "平民   ");
     guy->setColor(Color3B::BLACK);
     guy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
-                             ORIGIN_Y + HEIGHT/1.5));
+                             ORIGIN_Y + HEIGHT/1.6));
     this->addChild(guy, 1);
     
     auto spy = Label::createWithTTF(title, "卧底   ");
     spy->setColor(Color3B::BLACK);
     spy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
-                          ORIGIN_Y + HEIGHT/2));
+                          ORIGIN_Y + HEIGHT/2.1));
     this->addChild(spy, 1);
     
     auto lucky = Label::createWithTTF(title, "白板   ");
     lucky->setColor(Color3B::BLACK);
     lucky->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
-                              ORIGIN_Y + HEIGHT/3));
+                              ORIGIN_Y + HEIGHT/3.1));
     this->addChild(lucky, 1);
     
     //平民 number selector
@@ -165,6 +165,7 @@ bool RoleScene::init()
     this->addChild(sprite, 0);
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-30.mp3");
     
     return true;
 }
@@ -216,6 +217,7 @@ void RoleScene::minus(Ref *pSender, ROLE t)
         auto num = (Label *)this->getChildByTag(LUCKY);
         num->setString(number);
     }
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-30.mp3");
 }
 
 //suppose no more than 10 players
@@ -254,4 +256,5 @@ void RoleScene::add(Ref *pSender, ROLE t)
         auto num = (Label *)this->getChildByTag(LUCKY);
         num->setString(number);
     }
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-30.mp3");
 }

@@ -47,7 +47,7 @@ bool StartScene::init()
                                  ORIGIN_Y + HEIGHT/4));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(70);
+    MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(StartScene::menuStartCallback, this));
     
     // create menu, it's an autorelease object
@@ -79,10 +79,9 @@ bool StartScene::init()
     //reset word here
     WordsManager::getInstance()->init();
     
-    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra.m4a");
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
     
-    //CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra.m4a");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra_title.mp3");
     
     return true;
 }
@@ -91,7 +90,7 @@ bool StartScene::init()
 void StartScene::menuStartCallback(Ref* pSender)
 {
     auto Rolescene = RoleScene::createScene();
-    //CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("contra_title.mp3");
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, Rolescene));
 }

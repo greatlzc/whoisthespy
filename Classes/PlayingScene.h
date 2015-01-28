@@ -16,9 +16,10 @@ class PlayingScene : public cocos2d::Layer
 private:
     int mPlayerSelected;
     bool isGameEnded;
+    bool isModal;
 public:
     
-    PlayingScene() { mPlayerSelected = -1; isGameEnded = false; }
+    PlayingScene() { mPlayerSelected = -1; isGameEnded = false; isModal = false; }
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
     

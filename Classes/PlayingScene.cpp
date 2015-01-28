@@ -39,9 +39,6 @@ bool PlayingScene::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
     // background image
     auto sprite = Sprite::create("background.png");
     
@@ -59,7 +56,7 @@ bool PlayingScene::init()
                                   ORIGIN_Y + HEIGHT/7));
     this->addChild(forgot_label, 2);
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(60);
+    MenuItemFont::setFontSize(70);
     auto forgotItem = MenuItemFont::create("       ", CC_CALLBACK_1(PlayingScene::OnForgotWord, this));
     
     auto forgot_menu = Menu::create(forgotItem, NULL);
@@ -93,9 +90,6 @@ bool PlayingScene::init()
     auto marginX = WIDTH/3;
     auto marginY = sample->getContentSize().height*2;
     
-    MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(60);
-    
     //add players name on screen, 3 colums at most considering the name length
     TTFConfig title;
     title.fontFilePath = "FZJingLeiS-R-GB.ttf";
@@ -110,6 +104,8 @@ bool PlayingScene::init()
         pLabel->setTag(i);
         this->addChild(pLabel, 2);
     }
+    MenuItemFont::setFontName("Arial");
+    MenuItemFont::setFontSize(66);
     for (int i = 0; i < nPlayers; i++)
     {
         auto pName = Banker::getInstance()->mPlayers.at(i)->mName;
@@ -145,6 +141,8 @@ void PlayingScene::OnForgotWord(Ref* pSender)
         return;
     }
     
+    isModal = true;
+    
     //make background grey
     for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
     {
@@ -158,12 +156,15 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     kill_menu->setOpacity(128);
     background->setOpacity(128);
     
+    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
+    {
+        auto name = (Menu *)this->getChildByTag(i + 10);
+        name->setEnabled(false);
+    }
     forgot_menu->setEnabled(false);
     kill_menu->setEnabled(false);
     
     auto forgotten = Sprite::create("forgot.png");
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
     forgotten->setScale(1.5);
     forgotten->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     
@@ -196,6 +197,11 @@ void PlayingScene::OnForgotWord(Ref* pSender)
                     auto name = (Label *)this->getChildByTag(i);
                     name->setOpacity(255);
                 }
+                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
+                {
+                    auto name = (Menu *)this->getChildByTag(i + 10);
+                    name->setEnabled(true);
+                }
                 auto forgot_menu = (Menu *)this->getChildByTag(-2);
                 auto kill_menu = (Menu *)this->getChildByTag(-3);
                 auto background = (Sprite *)this->getChildByTag(-4);
@@ -204,6 +210,8 @@ void PlayingScene::OnForgotWord(Ref* pSender)
                 background->setOpacity(255);
                 forgot_menu->setEnabled(true);
                 kill_menu->setEnabled(true);
+                
+                isModal = false;
             }
             return true;
         }
@@ -222,6 +230,8 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     
     if ( Banker::getInstance()->mPlayers.at(mPlayerSelected)->isDead == true)
         return;
+    
+    isModal = true;
     
     Banker::getInstance()->mPlayers.at(mPlayerSelected)->isDead = true;
     
@@ -249,6 +259,11 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     kill_menu->setOpacity(128);
     background->setOpacity(128);
     
+    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
+    {
+        auto name = (Menu *)this->getChildByTag(i + 10);
+        name->setEnabled(false);
+    }
     forgot_menu->setEnabled(false);
     kill_menu->setEnabled(false);
     
@@ -275,8 +290,6 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
                                      "    " +
                                      "白板（" + llucky + "/" + lucky + "）");
     info->setColor(Color3B::BLACK);
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
     info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
     this->addChild(info);
     
@@ -306,6 +319,12 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
                     auto name = (Label *)this->getChildByTag(i);
                     name->setOpacity(255);
                 }
+                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
+                {
+                    auto name = (Menu *)this->getChildByTag(i + 10);
+                    name->setEnabled(true);
+                }
+                
                 auto forgot_menu = (Menu *)this->getChildByTag(-2);
                 auto kill_menu = (Menu *)this->getChildByTag(-3);
                 auto background = (Sprite *)this->getChildByTag(-4);
@@ -318,6 +337,7 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
                 if (Banker::getInstance()->GameEnding() != UNDEFINED) {
                     isGameEnded = true;
                 }
+                isModal = false;
             }
             return true;
         }
@@ -334,12 +354,15 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
         result->setString("果然是卧底");
     }
     else if (pRole == LUCKY) {
-        result->setString("白板走了");
+        result->setString("白板再见");
     }
 }
 
 void PlayingScene::OnNameTouched(Ref* pSender, int seq)
 {
+    if (isModal) {
+        return;
+    }
     mPlayerSelected = seq;
     int nPlayers = Banker::getInstance()->playerCount();
     
