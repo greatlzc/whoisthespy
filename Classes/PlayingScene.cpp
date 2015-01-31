@@ -21,10 +21,15 @@ Scene* PlayingScene::createScene()
     
     // 'layer' is an autorelease object
     auto layer = PlayingScene::create();
-    
+    layer->setTag(1);
+    auto forgot = ForgotDialog::create();
+    forgot->setTag(2);
+    auto kill = KillDialog::create();
+    kill->setTag(3);
     // add layer as a child to scene
-    scene->addChild(layer);
-    
+    scene->addChild(layer, 1);
+    scene->addChild(forgot, 2);
+    scene->addChild(kill, 3);
     // return the scene
     return scene;
 }
@@ -141,85 +146,15 @@ void PlayingScene::OnForgotWord(Ref* pSender)
         return;
     }
     
-    isModal = true;
-    
     //make background grey
-    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-    {
-        auto name = (Label *)this->getChildByTag(i);
-        name->setOpacity(128);
-    }
-    auto forgot_menu = (Menu *)this->getChildByTag(-2);
-    auto kill_menu = (Menu *)this->getChildByTag(-3);
-    auto background = (Sprite *)this->getChildByTag(-4);
-    forgot_menu->setOpacity(128);
-    kill_menu->setOpacity(128);
-    background->setOpacity(128);
-    
-    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-    {
-        auto name = (Menu *)this->getChildByTag(i + 10);
-        name->setEnabled(false);
-    }
-    forgot_menu->setEnabled(false);
-    kill_menu->setEnabled(false);
-    
-    auto forgotten = Sprite::create("forgot.png");
-    forgotten->setScale(1.5);
-    forgotten->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    
-    auto pName = Banker::getInstance()->mPlayers.at(mPlayerSelected)->mName;
-    std::string pWord = Banker::getInstance()->getWordbyName(pName);
-    
-    TTFConfig title;
-    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
-    title.fontSize = 50;
-    
-    auto word = Label::createWithTTF(title, pWord);
-    word->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    word->setColor(Color3B::BLACK);
-    this->addChild(word, 4);
-    this->addChild(forgotten, 3);
-
-    //forgotten word will show, touch to return
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->setSwallowTouches(true);
-    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) -> bool {
-        try {
-            Vec2 locationInNode = forgotten->convertToNodeSpace(touch->getLocation());
-            Size s = forgotten->getContentSize();
-            Rect rect = Rect(0, 0, s.width, s.height);
-            if (rect.containsPoint(locationInNode)) {
-                this->removeChild(word);
-                this->removeChild(forgotten);
-                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-                {
-                    auto name = (Label *)this->getChildByTag(i);
-                    name->setOpacity(255);
-                }
-                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-                {
-                    auto name = (Menu *)this->getChildByTag(i + 10);
-                    name->setEnabled(true);
-                }
-                auto forgot_menu = (Menu *)this->getChildByTag(-2);
-                auto kill_menu = (Menu *)this->getChildByTag(-3);
-                auto background = (Sprite *)this->getChildByTag(-4);
-                forgot_menu->setOpacity(255);
-                kill_menu->setOpacity(255);
-                background->setOpacity(255);
-                forgot_menu->setEnabled(true);
-                kill_menu->setEnabled(true);
-                
-                isModal = false;
-            }
-            return true;
+    for (Node* n : this->getChildren()) {
+        if (n->getTag() < 10) {
+            n->setOpacity(96);
         }
-        catch(std::bad_cast & err){
-            return true;
-        }
-    };
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, forgotten);
+    }
+    
+    auto dialog = (ForgotDialog*)this->getParent()->getChildByTag(2);
+    dialog->OnForgotWord(this);
 }
 
 void PlayingScene::OnKillPlayer(Ref* pSender)
@@ -231,138 +166,29 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     if ( Banker::getInstance()->mPlayers.at(mPlayerSelected)->isDead == true)
         return;
     
-    isModal = true;
-    
     Banker::getInstance()->mPlayers.at(mPlayerSelected)->isDead = true;
     
     auto dead = Sprite::create("dead.png");
-    auto name = (Label *)this->getChildByTag(mPlayerSelected);
+    auto name = (Label*)this->getChildByTag(mPlayerSelected);
     name->setColor(Color3B::BLACK);
-    auto menu = (Menu *)this->getChildByTag(mPlayerSelected + 10);
+    auto menu = (Menu*)this->getChildByTag(mPlayerSelected + 10);
     menu->setEnabled(false);
     dead->setPosition(name->getPosition());
     dead->setScale(0.75);
     this->addChild(dead);
     
-    auto pName = Banker::getInstance()->mPlayers.at(mPlayerSelected)->mName;
-    auto pRole = Banker::getInstance()->getRolebyName(pName);
-    
-    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-    {
-        auto name = (Label *)this->getChildByTag(i);
-        name->setOpacity(128);
-    }
-    auto forgot_menu = (Menu *)this->getChildByTag(-2);
-    auto kill_menu = (Menu *)this->getChildByTag(-3);
-    auto background = (Sprite *)this->getChildByTag(-4);
-    forgot_menu->setOpacity(128);
-    kill_menu->setOpacity(128);
-    background->setOpacity(128);
-    
-    for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-    {
-        auto name = (Menu *)this->getChildByTag(i + 10);
-        name->setEnabled(false);
-    }
-    forgot_menu->setEnabled(false);
-    kill_menu->setEnabled(false);
-    
-    //a banner, information about living guys
-    int nGuy = Banker::getInstance()->numGuy;
-    int nSpy = Banker::getInstance()->numSpy;
-    int nLucky = Banker::getInstance()->numLucky;
-    std::string guy = std::to_string(nGuy);
-    std::string spy = std::to_string(nSpy);
-    std::string lucky = std::to_string(nLucky);
-    int livingGuy = Banker::getInstance()->livingGuyCount();
-    int livingSpy = Banker::getInstance()->livingSpyCount();
-    int livingLucky = Banker::getInstance()->livingLuckyCount();
-    std::string lguy = std::to_string(livingGuy);
-    std::string lspy = std::to_string(livingSpy);
-    std::string llucky = std::to_string(livingLucky);
-    
-    TTFConfig title;
-    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
-    title.fontSize = 40;
-    auto info = Label::createWithTTF(title, "平民（" + lguy + "/" + guy + "）" +
-                                     "    " +
-                                     "卧底（" + lspy + "/" + spy + "）" +
-                                     "    " +
-                                     "白板（" + llucky + "/" + lucky + "）");
-    info->setColor(Color3B::BLACK);
-    info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
-    this->addChild(info);
-    
-    auto resultbg = Sprite::create("rank.png");
-    resultbg->setScale(1.5);
-    resultbg->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    this->addChild(resultbg, 3);
-    
-    auto result = Label::createWithTTF(title, "死者身份是……");
-    result->setColor(Color3B::BLACK);
-    result->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    this->addChild(result, 4);
-    
-    //voting result will show, touch to return, this may lead to next scene
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->setSwallowTouches(true);
-    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) -> bool {
-        try {
-            Vec2 locationInNode = resultbg->convertToNodeSpace(touch->getLocation());
-            Size s = resultbg->getContentSize();
-            Rect rect = Rect(0, 0, s.width, s.height);
-            if (rect.containsPoint(locationInNode)) {
-                this->removeChild(result);
-                this->removeChild(resultbg);
-                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-                {
-                    auto name = (Label *)this->getChildByTag(i);
-                    name->setOpacity(255);
-                }
-                for (int i = 0; i < Banker::getInstance()->playerCount(); i++)
-                {
-                    auto name = (Menu *)this->getChildByTag(i + 10);
-                    name->setEnabled(true);
-                }
-                
-                auto forgot_menu = (Menu *)this->getChildByTag(-2);
-                auto kill_menu = (Menu *)this->getChildByTag(-3);
-                auto background = (Sprite *)this->getChildByTag(-4);
-                forgot_menu->setOpacity(255);
-                kill_menu->setOpacity(255);
-                background->setOpacity(255);
-                forgot_menu->setEnabled(true);
-                kill_menu->setEnabled(true);
-                this->removeChild(info);
-                if (Banker::getInstance()->GameEnding() != UNDEFINED) {
-                    isGameEnded = true;
-                }
-                isModal = false;
-            }
-            return true;
+    for (Node* n : this->getChildren()) {
+        if (n->getTag() < 10) {
+            n->setOpacity(96);
         }
-        catch(std::bad_cast & err){
-            return true;
-        }
-    };
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, resultbg);
+    }
     
-    if (pRole == GUY) {
-        result->setString("平民冤死");
-    }
-    else if (pRole == SPY) {
-        result->setString("果然是卧底");
-    }
-    else if (pRole == LUCKY) {
-        result->setString("白板再见");
-    }
+    auto dialog = (KillDialog*)this->getParent()->getChildByTag(3);
+    dialog->OnKillPlayer(this);
 }
 
 void PlayingScene::OnNameTouched(Ref* pSender, int seq)
 {
-    if (isModal) {
-        return;
-    }
     mPlayerSelected = seq;
     int nPlayers = Banker::getInstance()->playerCount();
     
@@ -384,4 +210,277 @@ void PlayingScene::update(float dt)
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Super Mario Bros.mp3");
         Director::getInstance()->replaceScene(resultScene);
     }
+}
+
+bool ForgotDialog::init()
+{
+    //////////////////////////////
+    // 1. super init first
+    if ( !Layer::init() )
+    {
+        return false;
+    }
+    forgot = Sprite::create("forgot.png");
+    forgot->setScale(1.5);
+    forgot->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    this->addChild(forgot, 1);
+    forgot->setVisible(false);
+    
+    TTFConfig title;
+    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
+    title.fontSize = 50;
+    
+    word = Label::createWithTTF(title, "");
+    word->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    word->setColor(Color3B::BLACK);
+    this->addChild(word, 2);
+    word->setVisible(false);
+    
+    TTFConfig menu_title;
+    menu_title.fontFilePath = "yuweij.ttf";
+    menu_title.fontSize = 60;
+    info = Label::createWithTTF(menu_title, "你的关键词是：");
+    info->setColor(Color3B::BLACK);
+    info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
+    this->addChild(info, 2);
+    info->setVisible(false);
+    
+    //forgotten word will show, touch to return
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        Vec2 locationInNode = forgot->convertToNodeSpace(touch->getLocation());
+        Size s = forgot->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+        if (rect.containsPoint(locationInNode) && doModal)
+        {
+            return true;
+        }
+        return false;
+    };
+    touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        word->setVisible(false);
+        forgot->setVisible(false);
+        info->setVisible(false);
+        auto layer = this->getParent()->getChildByTag(1);
+        for (Node* n : layer->getChildren())
+        {
+            if (n->getTag() < 10)
+            {
+                n->setOpacity(255);
+            }
+        }
+        this->_eventDispatcher->removeEventListenersForTarget(this);
+        doModal = false;
+    };
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+    
+    doModal = false;
+    
+    return true;
+}
+
+void ForgotDialog::OnForgotWord(Ref* pSender)
+{
+    forgot->setVisible(true);
+    word->setVisible(true);
+    info->setVisible(true);
+    auto layer = (PlayingScene*)pSender;
+    auto pName = Banker::getInstance()->mPlayers.at(layer->mPlayerSelected)->mName;
+    std::string pWord = Banker::getInstance()->getWordbyName(pName);
+    word->setString(pWord);
+    doModal = true;
+    //forgotten word will show, touch to return
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        Vec2 locationInNode = forgot->convertToNodeSpace(touch->getLocation());
+        Size s = forgot->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+        if (rect.containsPoint(locationInNode) && doModal)
+        {
+            return true;
+        }
+        return false;
+    };
+    touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        word->setVisible(false);
+        forgot->setVisible(false);
+        info->setVisible(false);
+        auto layer = this->getParent()->getChildByTag(1);
+        for (Node* n : layer->getChildren())
+        {
+            if (n->getTag() < 10)
+            {
+                n->setOpacity(255);
+            }
+        }
+        this->_eventDispatcher->removeEventListenersForTarget(this);
+        doModal = false;
+    };
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+}
+
+bool KillDialog::init()
+{
+    //////////////////////////////
+    // 1. super init first
+    if ( !Layer::init() )
+    {
+        return false;
+    }
+    
+    //a banner, information about living guys
+    int nGuy = Banker::getInstance()->numGuy;
+    int nSpy = Banker::getInstance()->numSpy;
+    int nLucky = Banker::getInstance()->numLucky;
+    std::string guy = std::to_string(nGuy);
+    std::string spy = std::to_string(nSpy);
+    std::string lucky = std::to_string(nLucky);
+    int livingGuy = Banker::getInstance()->livingGuyCount();
+    int livingSpy = Banker::getInstance()->livingSpyCount();
+    int livingLucky = Banker::getInstance()->livingLuckyCount();
+    std::string lguy = std::to_string(livingGuy);
+    std::string lspy = std::to_string(livingSpy);
+    std::string llucky = std::to_string(livingLucky);
+    
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 48;
+    info = Label::createWithTTF(title, "当前：平民（" + lguy + "/" + guy + "）" +
+                                     "    " +
+                                     "卧底（" + lspy + "/" + spy + "）" +
+                                     "    " +
+                                     "白板（" + llucky + "/" + lucky + "）");
+    info->setColor(Color3B::BLACK);
+    info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
+    this->addChild(info, 2);
+    info->setVisible(false);
+    
+    kill = Sprite::create("rank.png");
+    kill->setScale(1.5);
+    kill->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    this->addChild(kill, 1);
+    kill->setVisible(false);
+    
+    title.fontSize = 50;
+    
+    result = Label::createWithTTF(title, "");
+    
+    result->setColor(Color3B::BLACK);
+    result->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    this->addChild(result, 2);
+    result->setVisible(false);
+    
+    //voting result will show, touch to return, this may lead to next scene
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        Vec2 locationInNode = kill->convertToNodeSpace(touch->getLocation());
+        Size s = kill->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+        if (rect.containsPoint(locationInNode) && doModal)
+        {
+            return true;
+        }
+        return false;
+    };
+    touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        result->setVisible(false);
+        kill->setVisible(false);
+        info->setVisible(false);
+        auto layer = (PlayingScene*)this->getParent()->getChildByTag(1);
+        for (Node* n : layer->getChildren())
+        {
+            if (n->getTag() < 10)
+            {
+                n->setOpacity(255);
+            }
+        }
+        doModal = false;
+        if (Banker::getInstance()->GameEnding() != UNDEFINED) {
+            layer->isGameEnded = true;
+        }
+        this->_eventDispatcher->removeEventListenersForTarget(this);
+    };
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+    
+    doModal = false;
+    
+    return true;
+}
+
+void KillDialog::OnKillPlayer(Ref* pSender)
+{
+    kill->setVisible(true);
+    result->setVisible(true);
+    info->setVisible(true);
+    
+    auto layer = (PlayingScene*)pSender;
+    
+    auto pName = Banker::getInstance()->mPlayers.at(layer->mPlayerSelected)->mName;
+    auto pRole = Banker::getInstance()->getRolebyName(pName);
+    
+    if (pRole == GUY) {
+        result->setString("平民冤死");
+    }
+    else if (pRole == SPY) {
+        result->setString("果然是卧底");
+    }
+    else if (pRole == LUCKY) {
+        result->setString("白板再见");
+    }
+    doModal = true;
+    
+    int nGuy = Banker::getInstance()->numGuy;
+    int nSpy = Banker::getInstance()->numSpy;
+    int nLucky = Banker::getInstance()->numLucky;
+    std::string guy = std::to_string(nGuy);
+    std::string spy = std::to_string(nSpy);
+    std::string lucky = std::to_string(nLucky);
+    int livingGuy = Banker::getInstance()->livingGuyCount();
+    int livingSpy = Banker::getInstance()->livingSpyCount();
+    int livingLucky = Banker::getInstance()->livingLuckyCount();
+    std::string lguy = std::to_string(livingGuy);
+    std::string lspy = std::to_string(livingSpy);
+    std::string llucky = std::to_string(livingLucky);
+    
+    info->setString("当前：平民（" + lguy + "/" + guy + "）" +
+                    "    " +
+                    "卧底（" + lspy + "/" + spy + "）" +
+                    "    " +
+                    "白板（" + llucky + "/" + lucky + "）");
+    
+    //voting result will show, touch to return, this may lead to next scene
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->setSwallowTouches(true);
+    touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        Vec2 locationInNode = kill->convertToNodeSpace(touch->getLocation());
+        Size s = kill->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+        if (rect.containsPoint(locationInNode) && doModal)
+        {
+            return true;
+        }
+        return false;
+    };
+    touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
+        result->setVisible(false);
+        kill->setVisible(false);
+        info->setVisible(false);
+        auto layer = (PlayingScene*)this->getParent()->getChildByTag(1);
+        for (Node* n : layer->getChildren())
+        {
+            if (n->getTag() < 10)
+            {
+                n->setOpacity(255);
+            }
+        }
+        doModal = false;
+        if (Banker::getInstance()->GameEnding() != UNDEFINED) {
+            layer->isGameEnded = true;
+        }
+        this->_eventDispatcher->removeEventListenersForTarget(this);
+    };
+    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 }

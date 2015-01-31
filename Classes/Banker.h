@@ -25,6 +25,8 @@ public:
     
     friend class PlayingScene;
     friend class ResultScene;
+    friend class ForgotDialog;
+    friend class KillDialog;
     static Banker* getInstance();
     void shuffle();
     void addPlayer(Player* p);

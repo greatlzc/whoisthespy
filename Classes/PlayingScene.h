@@ -16,16 +16,17 @@ class PlayingScene : public cocos2d::Layer
 private:
     int mPlayerSelected;
     bool isGameEnded;
-    bool isModal;
 public:
     
-    PlayingScene() { mPlayerSelected = -1; isGameEnded = false; isModal = false; }
+    PlayingScene() { mPlayerSelected = -1; isGameEnded = false; }
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();
     
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     
+    friend class ForgotDialog;
+    friend class KillDialog;
     // a selector callback
     void menuStartCallback(cocos2d::Ref* pSender);
     
@@ -39,6 +40,38 @@ public:
     void OnNameTouched(Ref* pSender, int seq);
     
     void update(float dt);
+};
+
+class ForgotDialog : public cocos2d::Layer
+{
+public:
+    virtual bool init();
+    
+    CREATE_FUNC(ForgotDialog);
+    
+    void OnForgotWord(Ref* pSender);
+    
+private:
+    cocos2d::Sprite* forgot;
+    cocos2d::Label* word;
+    cocos2d::Label* info;
+    bool doModal;
+};
+
+class KillDialog : public cocos2d::Layer
+{
+public:
+    virtual bool init();
+    
+    CREATE_FUNC(KillDialog);
+    
+    void OnKillPlayer(Ref* pSender);
+    
+private:
+    cocos2d::Sprite* kill;
+    cocos2d::Label* result;
+    cocos2d::Label* info;
+    bool doModal;
 };
 
 #endif /* defined(__HelloWorldDemo__PlayingScene__) */

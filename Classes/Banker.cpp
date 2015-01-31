@@ -175,7 +175,7 @@ bool Banker::isPlayersFull()
 
 int Banker::playerCount()
 {
-    return mPlayers.size();
+    return (int)mPlayers.size();
 }
 
 //rank players by score descent
