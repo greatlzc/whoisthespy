@@ -149,7 +149,7 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     //make background grey
     for (Node* n : this->getChildren()) {
         if (n->getTag() < 10) {
-            n->setOpacity(96);
+            n->setOpacity(150);
         }
     }
     
@@ -174,12 +174,12 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
     auto menu = (Menu*)this->getChildByTag(mPlayerSelected + 10);
     menu->setEnabled(false);
     dead->setPosition(name->getPosition());
-    dead->setScale(0.75);
-    this->addChild(dead);
+    dead->setScale(0.3);
+    this->addChild(dead, 3);
     
     for (Node* n : this->getChildren()) {
         if (n->getTag() < 10) {
-            n->setOpacity(96);
+            n->setOpacity(150);
         }
     }
     
@@ -331,27 +331,21 @@ bool KillDialog::init()
     }
     
     //a banner, information about living guys
-    int nGuy = Banker::getInstance()->numGuy;
-    int nSpy = Banker::getInstance()->numSpy;
-    int nLucky = Banker::getInstance()->numLucky;
-    std::string guy = std::to_string(nGuy);
-    std::string spy = std::to_string(nSpy);
-    std::string lucky = std::to_string(nLucky);
     int livingGuy = Banker::getInstance()->livingGuyCount();
     int livingSpy = Banker::getInstance()->livingSpyCount();
     int livingLucky = Banker::getInstance()->livingLuckyCount();
-    std::string lguy = std::to_string(livingGuy);
-    std::string lspy = std::to_string(livingSpy);
-    std::string llucky = std::to_string(livingLucky);
+    std::string guy = std::to_string(livingGuy);
+    std::string spy = std::to_string(livingSpy);
+    std::string lucky = std::to_string(livingLucky);
     
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 48;
-    info = Label::createWithTTF(title, "当前：平民（" + lguy + "/" + guy + "）" +
+    info = Label::createWithTTF(title, "当前：平民 " + guy + " 人" +
                                      "    " +
-                                     "卧底（" + lspy + "/" + spy + "）" +
+                                     "卧底 " + spy + " 人" +
                                      "    " +
-                                     "白板（" + llucky + "/" + lucky + "）");
+                                     "白板 " + lucky + " 人");
     info->setColor(Color3B::BLACK);
     info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
     this->addChild(info, 2);
@@ -432,24 +426,18 @@ void KillDialog::OnKillPlayer(Ref* pSender)
     }
     doModal = true;
     
-    int nGuy = Banker::getInstance()->numGuy;
-    int nSpy = Banker::getInstance()->numSpy;
-    int nLucky = Banker::getInstance()->numLucky;
-    std::string guy = std::to_string(nGuy);
-    std::string spy = std::to_string(nSpy);
-    std::string lucky = std::to_string(nLucky);
     int livingGuy = Banker::getInstance()->livingGuyCount();
     int livingSpy = Banker::getInstance()->livingSpyCount();
     int livingLucky = Banker::getInstance()->livingLuckyCount();
-    std::string lguy = std::to_string(livingGuy);
-    std::string lspy = std::to_string(livingSpy);
-    std::string llucky = std::to_string(livingLucky);
+    std::string guy = std::to_string(livingGuy);
+    std::string spy = std::to_string(livingSpy);
+    std::string lucky = std::to_string(livingLucky);
     
-    info->setString("当前：平民（" + lguy + "/" + guy + "）" +
+    info->setString("当前：平民 " + guy + " 人" +
                     "    " +
-                    "卧底（" + lspy + "/" + spy + "）" +
+                    "卧底 " + spy + " 人" +
                     "    " +
-                    "白板（" + llucky + "/" + lucky + "）");
+                    "白板 " + lucky + " 人");
     
     //voting result will show, touch to return, this may lead to next scene
     auto touchListener = EventListenerTouchOneByOne::create();

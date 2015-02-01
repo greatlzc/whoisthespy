@@ -30,6 +30,8 @@
 		3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */; };
 		3C4F368F1A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
 		3C4F36901A77FA1900E4C35D /* GameUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */; };
+		3C53A92F1A7D274300BD3D97 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C53A92E1A7D274300BD3D97 /* dead.png */; };
+		3C53A9301A7D274300BD3D97 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C53A92E1A7D274300BD3D97 /* dead.png */; };
 		3C9E937D1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937E1A6FFD7E00567EA5 /* name_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93711A6FFD7E00567EA5 /* name_0.png */; };
 		3C9E937F1A6FFD7E00567EA5 /* name.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E93721A6FFD7E00567EA5 /* name.fnt */; };
@@ -90,7 +92,6 @@
 		3CECD5AF1A6EBC3200BCD12C /* start.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3CECD5AC1A6EBC3200BCD12C /* start.fnt */; };
 		3CECD5B01A6EBC3200BCD12C /* start.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3CECD5AC1A6EBC3200BCD12C /* start.fnt */; };
 		3CF4F8411A61616A00D5E2E4 /* forgot.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4F8401A61616A00D5E2E4 /* forgot.png */; };
-		3CF4F8431A61946C00D5E2E4 /* dead.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4F8421A61946C00D5E2E4 /* dead.png */; };
 		3CF4F8471A62558800D5E2E4 /* rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4F8451A62558800D5E2E4 /* rank.png */; };
 		3CF8D7E91A4320670073EAC4 /* WordsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */; };
 		3CF8D7EA1A4320670073EAC4 /* WordsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */; };
@@ -300,6 +301,7 @@
 		3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Mario Bros.mp3"; sourceTree = "<group>"; };
 		3C4F368D1A77FA1900E4C35D /* GameUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameUtils.cpp; path = ../Classes/GameUtils.cpp; sourceTree = "<group>"; };
 		3C4F368E1A77FA1900E4C35D /* GameUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameUtils.h; path = ../Classes/GameUtils.h; sourceTree = "<group>"; };
+		3C53A92E1A7D274300BD3D97 /* dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dead.png; sourceTree = "<group>"; };
 		3C9E93711A6FFD7E00567EA5 /* name_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = name_0.png; sourceTree = "<group>"; };
 		3C9E93721A6FFD7E00567EA5 /* name.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name.fnt; sourceTree = "<group>"; };
 		3C9E93731A6FFD7E00567EA5 /* other_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other_0.png; sourceTree = "<group>"; };
@@ -341,7 +343,6 @@
 		3CECD5AB1A6EBC3200BCD12C /* start_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_0.png; sourceTree = "<group>"; };
 		3CECD5AC1A6EBC3200BCD12C /* start.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.fnt; sourceTree = "<group>"; };
 		3CF4F8401A61616A00D5E2E4 /* forgot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forgot.png; sourceTree = "<group>"; };
-		3CF4F8421A61946C00D5E2E4 /* dead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dead.png; sourceTree = "<group>"; };
 		3CF4F8451A62558800D5E2E4 /* rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank.png; sourceTree = "<group>"; };
 		3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WordsManager.cpp; path = ../Classes/WordsManager.cpp; sourceTree = "<group>"; };
 		3CF8D7E81A4320670073EAC4 /* WordsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordsManager.h; path = ../Classes/WordsManager.h; sourceTree = "<group>"; };
@@ -632,13 +633,13 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3C53A92E1A7D274300BD3D97 /* dead.png */,
 				3CB010F31A794AD200DFB268 /* button-30.mp3 */,
 				3CB010F01A7948E500DFB268 /* contra_title.mp3 */,
 				3C4F36871A77E78600E4C35D /* Super Mario Bros.mp3 */,
 				3C4400801A77E1FF00876D7B /* button-28.wav */,
 				3C9E939D1A713ADC00567EA5 /* background.png */,
 				3CF4F8451A62558800D5E2E4 /* rank.png */,
-				3CF4F8421A61946C00D5E2E4 /* dead.png */,
 				3CF4F8401A61616A00D5E2E4 /* forgot.png */,
 				3CCC4A431A4DB2D8001554FD /* play 2.png */,
 				3CCC4A441A4DB2D8001554FD /* play2 2.png */,
@@ -827,9 +828,9 @@
 				3CB010F41A794AD200DFB268 /* button-30.mp3 in Resources */,
 				3C4F36881A77E78600E4C35D /* Super Mario Bros.mp3 in Resources */,
 				3C9E93911A6FFD7E00567EA5 /* word_0.png in Resources */,
+				3C53A92F1A7D274300BD3D97 /* dead.png in Resources */,
 				3CF4F8411A61616A00D5E2E4 /* forgot.png in Resources */,
 				3C9E938D1A6FFD7E00567EA5 /* role_0.png in Resources */,
-				3CF4F8431A61946C00D5E2E4 /* dead.png in Resources */,
 				3C9E93891A6FFD7E00567EA5 /* result_0.png in Resources */,
 				3C4400771A74CB8700876D7B /* yuweij.ttf in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
@@ -885,6 +886,7 @@
 				3CECD5AE1A6EBC3200BCD12C /* start_0.png in Resources */,
 				3C9E938E1A6FFD7E00567EA5 /* role_0.png in Resources */,
 				3C9E93801A6FFD7E00567EA5 /* name.fnt in Resources */,
+				3C53A9301A7D274300BD3D97 /* dead.png in Resources */,
 				3C9E93821A6FFD7E00567EA5 /* other_0.png in Resources */,
 				3C9E93941A6FFD7E00567EA5 /* word.txt in Resources */,
 				3CC6F45D1A406EE80090A4FC /* mainbg.png in Resources */,
@@ -1004,6 +1006,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1025,6 +1028,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "whospy iOS";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1036,6 +1040,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1055,6 +1060,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "whospy iOS";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

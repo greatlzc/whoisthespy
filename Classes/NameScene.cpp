@@ -45,7 +45,7 @@ bool NameScene::init()
     auto menu_label = Label::createWithTTF(menu_title, "<继续>");
     menu_label->setColor(Color3B::BLACK);
     menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
-                                 ORIGIN_Y + HEIGHT/4));
+                                 ORIGIN_Y + HEIGHT/5));
     this->addChild(menu_label, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
@@ -54,7 +54,7 @@ bool NameScene::init()
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, NULL);
     menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
-                           ORIGIN_Y + HEIGHT/4));
+                           ORIGIN_Y + HEIGHT/5));
     this->addChild(menu, 1);
     
     TTFConfig title;
@@ -132,6 +132,11 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
     this->setPosition(Vec2(0, 0));
     
     auto text = (TextFieldTTF*)this->getChildByTag(2);
+    if (text->getString().find(" ") != std::string::npos) {
+        auto text = (Label*)this->getChildByTag(1);
+        text->setString("输入错误，不能包含空格");
+        return false;
+    }
     Player* newPlayer = new Player(text->getString());
     Banker::getInstance()->addPlayer(newPlayer);
     
@@ -167,6 +172,11 @@ void NameScene::update(float dt)
     auto text = (Label*)this->getChildByTag(1);
     auto input = (TextFieldTTF*)this->getChildByTag(2);
     if (remain && 0 != Banker::getInstance()->playerCount()) {
+        if (text->getString() == "输入错误，不能包含空格" &&
+            input->getString().find(" ") != std::string::npos)
+        {
+            return;
+        }
         std::stringstream ss;
         ss<<"尚需输入 "<<remain<<" 个";
         text->setString(ss.str().c_str());
