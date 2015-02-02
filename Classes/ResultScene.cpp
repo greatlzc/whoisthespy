@@ -141,7 +141,7 @@ bool ResultScene::init()
     }
 
     TTFConfig rank;
-    rank.fontFilePath = "FZJingLeiS-R-GB.ttf";
+    rank.fontFilePath = "yuweij.ttf";
     rank.fontSize = 64;
     
     auto no1label = Label::createWithTTF(rank, "一 " + no1name);

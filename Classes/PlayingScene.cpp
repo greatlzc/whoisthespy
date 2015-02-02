@@ -97,7 +97,7 @@ bool PlayingScene::init()
     
     //add players name on screen, 3 colums at most considering the name length
     TTFConfig title;
-    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
+    title.fontFilePath = "yuweij.ttf";
     title.fontSize = 60;
     int nPlayers = Banker::getInstance()->playerCount();
     for (int i = 0; i < nPlayers; i++)
@@ -227,7 +227,7 @@ bool ForgotDialog::init()
     forgot->setVisible(false);
     
     TTFConfig title;
-    title.fontFilePath = "FZJingLeiS-R-GB.ttf";
+    title.fontFilePath = "yuweij.ttf";
     title.fontSize = 50;
     
     word = Label::createWithTTF(title, "");

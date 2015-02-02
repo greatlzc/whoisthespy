@@ -68,7 +68,7 @@ bool WordsSceneDefine::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    TextFieldTTF* guy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入平民词 }", "Arial", 60);
+    TextFieldTTF* guy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入平民词 }", "Menlo", 60);
     guy->setColor(Color3B::BLACK);
     guy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                              ORIGIN_Y + HEIGHT/1.8));
@@ -76,7 +76,7 @@ bool WordsSceneDefine::init()
     guy->setDelegate(this);
     this->addChild(guy, 2);
     
-    TextFieldTTF* spy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入卧底词 }", "Arial", 60);
+    TextFieldTTF* spy = TextFieldTTF::textFieldWithPlaceHolder("{ 输入卧底词 }", "Menlo", 60);
     spy->setColor(Color3B::BLACK);
     spy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                           ORIGIN_X + HEIGHT/2.8));
@@ -138,15 +138,6 @@ bool WordsSceneDefine::onTextFieldAttachWithIME(TextFieldTTF *sender)
 bool WordsSceneDefine::onTextFieldDetachWithIME(TextFieldTTF* sender)
 {
     this->setPosition(Vec2(0, 0));
-//    if (sender->getTag() == 1)
-//    {
-//        auto text = (TextFieldTTF*)this->getChildByTag(1);
-//        
-//    }
-//    else if (sender->getTag() == 2)
-//    {
-//        auto text = (TextFieldTTF*)this->getChildByTag(2);
-//    }
     return TextFieldDelegate::onTextFieldDetachWithIME(sender);
 }
 

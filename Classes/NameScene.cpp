@@ -68,7 +68,7 @@ bool NameScene::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    TextFieldTTF* text = TextFieldTTF::textFieldWithPlaceHolder("{ 点击此处输入 }", "FZJingLeiS-R-GB.ttf", 70);
+    TextFieldTTF* text = TextFieldTTF::textFieldWithPlaceHolder("{ 点击此处输入 }", "Menlo", 70);
     text->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                            ORIGIN_Y + HEIGHT/2));
     text->setColor(Color3B::BLACK);
@@ -79,7 +79,7 @@ bool NameScene::init()
     
     //an invisible menu for the textfield
     MenuItemFont::setFontName("Arial");
-    MenuItemFont::setFontSize(70);
+    MenuItemFont::setFontSize(80);
     auto blank = MenuItemFont::create("                          ", CC_CALLBACK_1(NameScene::textFieldPressed, this));
     auto blank_menu = Menu::create(blank, NULL);
     blank_menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
