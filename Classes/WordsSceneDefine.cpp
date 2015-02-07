@@ -91,7 +91,7 @@ bool WordsSceneDefine::init()
     auto blank1 = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 1));
     auto blank_menu1 = Menu::create(blank1, NULL);
     blank_menu1->setPosition(Vec2(ORIGIN_X + WIDTH/2,
-                                 ORIGIN_Y + HEIGHT/2));
+                                 ORIGIN_Y + HEIGHT/1.8));
     this->addChild(blank_menu1);
     
     //invisible menu for 卧底 word
@@ -102,7 +102,7 @@ bool WordsSceneDefine::init()
     this->addChild(blank_menu2);
     
     // background image
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BGSRC);
     
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));

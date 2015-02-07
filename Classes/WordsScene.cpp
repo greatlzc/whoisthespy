@@ -82,7 +82,7 @@ bool WordsScene::init()
     this->addChild(default_menu, 1);
     
     // background image
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BGSRC);
     
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));

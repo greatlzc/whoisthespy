@@ -50,7 +50,6 @@ void WordsManager::init()
     addWord("生菜", "白菜");
     addWord("赵敏", "黄蓉");
     addWord("海狮", "海豚");
-    addWord("人妖", "太监");
     addWord("橘子", "橙子");
     addWord("油条", "麻花");
     addWord("魔术师", "魔法师");
@@ -62,7 +61,6 @@ void WordsManager::init()
     addWord("刘诗诗", "刘亦菲");
     addWord("森马", "以纯");
     addWord("格格", "公主");
-    addWord("松岛枫", "苍井空");
     addWord("飞行员", "宇航员");
     addWord("高富帅", "白富美");
     addWord("香皂", "肥皂");
@@ -77,7 +75,6 @@ void WordsManager::init()
     addWord("天猫", "淘宝");
     addWord("春联", "对联");
     addWord("贝斯", "吉他");
-    addWord("双飞", "3P");
     addWord("季风", "信风");
     addWord("火炉", "火炕");
     addWord("潮水", "洪水");
@@ -92,7 +89,6 @@ void WordsManager::init()
     addWord("一起又看流星雨", "一起来看流星雨");
     addWord("工藤新一", "江户川柯南");
     addWord("丧尸", "僵尸");
-    addWord("2B", "SB");
     addWord("汉奸", "内奸");
     addWord("人人网", "校内网");
     addWord("威士忌", "白兰地");
@@ -100,6 +96,52 @@ void WordsManager::init()
     addWord("西域", "西部");
     addWord("卧底", "间谍");
     addWord("宁夏", "甘肃");
+    addWord("红烧牛肉面", "香辣牛肉面");
+    addWord("纸巾", "手帕");
+    addWord("唇膏", "口红");
+    addWord("联通", "移动");
+    addWord("大白兔", "金丝猴");
+    addWord("水泡", "气泡");
+    addWord("欧元", "美元");
+    addWord("护发素", "洗发露");
+    addWord("竹笋", "竹子");
+    addWord("十面埋伏", "四面楚歌");
+    addWord("电动车", "摩托车");
+    addWord("轻轨", "地铁");
+    addWord("零花钱", "生活费");
+    addWord("情人节", "光棍节");
+    addWord("鼠目寸光", "井底之蛙");
+    addWord("神雕侠侣", "天龙八部");
+    addWord("圆珠笔", "中性笔");
+    addWord("裸婚", "闪婚");
+    addWord("电梯", "扶梯");
+    addWord("草莓", "蓝莓");
+    addWord("滑雪", "滑冰");
+    addWord("离婚", "失恋");
+    addWord("家乡", "故乡");
+    addWord("金山毒霸", "卡巴斯基");
+    addWord("杭州", "苏州");
+    addWord("小品", "话剧");
+    addWord("警察", "捕快");
+    addWord("老师", "教师");
+    addWord("抓狂", "发狂");
+    addWord("音乐", "歌曲");
+    addWord("结婚", "成亲");
+    addWord("荷花", "莲花");
+    addWord("五颜六色", "五光十色");
+    addWord("薯条", "薯片");
+    addWord("百年好合", "白头偕老");
+    addWord("学姐", "师姐");
+    addWord("矿泉水", "纯净水");
+    addWord("桂林米粉", "过桥米线");
+    addWord("游泳圈", "救生衣");
+    addWord("照相机", "摄影机");
+    addWord("快乐大本营", "百变大咖秀");
+    addWord("葵花宝典", "辟邪剑谱");
+    addWord("冰激凌", "冰淇淋");
+    addWord("李秋水", "李莫愁");
+    addWord("命中注定", "青梅竹马");
+    addWord("手臂", "胳膊");
 }
 
 void WordsManager::addWord(std::string g, std::string s)

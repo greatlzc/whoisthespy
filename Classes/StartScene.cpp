@@ -68,7 +68,7 @@ bool StartScene::init()
     this->addChild(label, 1);
     
     // add "StartScene" splash screen"
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BGSRC);
     
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
@@ -81,7 +81,7 @@ bool StartScene::init()
     
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra_title.mp3");
+    //CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra_title.mp3");
     
     return true;
 }
@@ -90,7 +90,7 @@ bool StartScene::init()
 void StartScene::menuStartCallback(Ref* pSender)
 {
     auto Rolescene = RoleScene::createScene();
-    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("contra_title.mp3");
+    //CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("contra_title.mp3");
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, Rolescene));
 }

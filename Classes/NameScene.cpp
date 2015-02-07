@@ -87,7 +87,7 @@ bool NameScene::init()
     this->addChild(blank_menu);
     
     // background image
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BGSRC);
     
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));

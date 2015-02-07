@@ -18,11 +18,13 @@ class GameUtils
 public:
     static Size getVisibleSize();
     static Vec2 getOrigin();
+    static std::string getBGsource();
 };
 
 #define ORIGIN_X GameUtils::getOrigin().x
 #define ORIGIN_Y GameUtils::getOrigin().y
 #define WIDTH GameUtils::getVisibleSize().width
 #define HEIGHT GameUtils::getVisibleSize().height
+#define BGSRC GameUtils::getBGsource()
 
 #endif /* defined(__whospy__GameUtils__) */

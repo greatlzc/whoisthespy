@@ -19,6 +19,27 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLView::create("My Game");
         director->setOpenGLView(glview);
     }
+    
+//    typedef struct tagResource
+//    {
+//        cocos2d::Size size;
+//        char directory[100];
+//    }Resource;
+//    
+//    static Resource smallResource  =  { cocos2d::Size(480, 320),   "iphone" };
+//    static Resource mediumResource =  { cocos2d::Size(1024, 768),  "ipad"   };
+//    static Resource largeResource  =  { cocos2d::Size(2048, 1536), "ipadhd" };
+//    static cocos2d::Size designResolutionSize = cocos2d::Size(1136, 640);
+//    
+//    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+//    
+//    Size frameSize = glview->getFrameSize();
+    
+    
+    
+//    if (frameSize.width < largeResource.size.width) {
+//        director->setContentScaleFactor(largeResource.size.width/frameSize.width);
+//    }
 
     // turn on display FPS
     //director->setDisplayStats(true);
@@ -29,7 +50,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // create a scene. it's an autorelease object
     auto scene = StartScene::createScene();
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra_title.mp3");
+    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra_title.mp3");
     // run
     director->runWithScene(scene);
 

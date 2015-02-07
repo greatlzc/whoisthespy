@@ -45,7 +45,7 @@ bool PlayingScene::init()
     }
     
     // background image
-    auto sprite = Sprite::create("background.png");
+    auto sprite = Sprite::create(BGSRC);
     
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
@@ -123,7 +123,8 @@ bool PlayingScene::init()
         this->addChild(pMenu, 1);
     }
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Super Mario Bros.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
     
     scheduleUpdate();
     return true;
@@ -207,7 +208,7 @@ void PlayingScene::update(float dt)
     //check if game is ending per second
     if (isGameEnded) {
         auto resultScene = ResultScene::createScene();
-        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Super Mario Bros.mp3");
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
         Director::getInstance()->replaceScene(resultScene);
     }
 }
