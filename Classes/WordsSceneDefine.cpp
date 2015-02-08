@@ -107,8 +107,6 @@ bool WordsSceneDefine::init()
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
-    
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
     //scheduleUpdate();
     return true;
 }

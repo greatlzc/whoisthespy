@@ -93,8 +93,6 @@ bool NameScene::init()
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
-    
     scheduleUpdate();
     return true;
 }
@@ -134,7 +132,12 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
     auto text = (TextFieldTTF*)this->getChildByTag(2);
     if (text->getString().find(" ") != std::string::npos) {
         auto text = (Label*)this->getChildByTag(1);
-        text->setString("输入错误，不能包含空格");
+        text->setString("输入错误，名字不能包含空格");
+        return false;
+    }
+    if (text->getString() == "") {
+        auto text = (Label*)this->getChildByTag(1);
+        text->setString("输入错误，名字不能为空");
         return false;
     }
     Player* newPlayer = new Player(text->getString());
@@ -172,11 +175,16 @@ void NameScene::update(float dt)
     auto text = (Label*)this->getChildByTag(1);
     auto input = (TextFieldTTF*)this->getChildByTag(2);
     if (remain && 0 != Banker::getInstance()->playerCount()) {
-        if (text->getString() == "输入错误，不能包含空格" &&
+        if (text->getString() == "输入错误，名字不能包含空格" &&
             input->getString().find(" ") != std::string::npos)
         {
             return;
         }
+//        if (text->getString() == "输入错误，名字不能为空" &&
+//            input->getString() == "")
+//        {
+//            return;
+//        }
         std::stringstream ss;
         ss<<"尚需输入 "<<remain<<" 个";
         text->setString(ss.str().c_str());

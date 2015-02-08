@@ -79,9 +79,7 @@ bool StartScene::init()
     //reset word here
     WordsManager::getInstance()->init();
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
-    
-    //CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("contra_title.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("opening.mp3");
     
     return true;
 }
@@ -90,7 +88,7 @@ bool StartScene::init()
 void StartScene::menuStartCallback(Ref* pSender)
 {
     auto Rolescene = RoleScene::createScene();
-    //CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("contra_title.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, Rolescene));
 }

@@ -70,21 +70,21 @@ bool RoleScene::init()
     this->addChild(label, 1);
     
     title.fontSize = 76;
-    auto guy = Label::createWithTTF(title, "平民   ");
+    auto guy = Label::createWithTTF(title, "平民:   ");
     guy->setColor(Color3B::BLACK);
-    guy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+    guy->setPosition(Vec2(ORIGIN_X + WIDTH/2.7,
                              ORIGIN_Y + HEIGHT/1.6));
     this->addChild(guy, 1);
     
-    auto spy = Label::createWithTTF(title, "卧底   ");
+    auto spy = Label::createWithTTF(title, "卧底:   ");
     spy->setColor(Color3B::BLACK);
-    spy->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+    spy->setPosition(Vec2(ORIGIN_X + WIDTH/2.7,
                           ORIGIN_Y + HEIGHT/2.1));
     this->addChild(spy, 1);
     
-    auto lucky = Label::createWithTTF(title, "白板   ");
+    auto lucky = Label::createWithTTF(title, "白板:   ");
     lucky->setColor(Color3B::BLACK);
-    lucky->setPosition(Vec2(ORIGIN_X + WIDTH/2.5,
+    lucky->setPosition(Vec2(ORIGIN_X + WIDTH/2.7,
                               ORIGIN_Y + HEIGHT/3.1));
     this->addChild(lucky, 1);
     
@@ -97,7 +97,9 @@ bool RoleScene::init()
     c_minus_menu->setPosition(Vec2(guy->getPositionX() + guy->getContentSize().width/2, guy->getPositionY()));
     this->addChild(c_minus_menu, 1);
     
-    auto c_num = Label::create("0", "Chalkduster", 80);
+    //default number of 平民
+    Banker::getInstance()->numGuy = 2;
+    auto c_num = Label::createWithSystemFont("2", "Chalkduster", 80);
     c_num->setColor(Color3B::BLACK);
     c_num->setPosition(Vec2(c_minus_menu->getPositionX() + guy->getContentSize().width/3, guy->getPositionY()));
     c_num->setTag(GUY);
@@ -120,7 +122,9 @@ bool RoleScene::init()
     s_minus_menu->setPosition(Vec2(spy->getPositionX() + spy->getContentSize().width/2, spy->getPositionY()));
     this->addChild(s_minus_menu, 1);
     
-    auto s_num = Label::create("0", "Chalkduster", 80);
+    //default number of 卧底
+    Banker::getInstance()->numSpy = 1;
+    auto s_num = Label::createWithSystemFont("1", "Chalkduster", 80);
     s_num->setColor(Color3B::BLACK);
     s_num->setPosition(Vec2(s_minus_menu->getPositionX() + spy->getContentSize().width/3, spy->getPositionY()));
     s_num->setTag(SPY);
@@ -143,7 +147,7 @@ bool RoleScene::init()
     n_minus_menu->setPosition(Vec2(lucky->getPositionX() + lucky->getContentSize().width/2, lucky->getPositionY()));
     this->addChild(n_minus_menu, 1);
     
-    auto n_num = Label::create("0", "Chalkduster", 80);
+    auto n_num = Label::createWithSystemFont("0", "Chalkduster", 80);
     n_num->setColor(Color3B::BLACK);
     n_num->setPosition(Vec2(n_minus_menu->getPositionX() + lucky->getContentSize().width/3, lucky->getPositionY()));
     n_num->setTag(LUCKY);
@@ -163,9 +167,6 @@ bool RoleScene::init()
     // position it on the center of the screen
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
-    
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-30.mp3");
     
     return true;
 }

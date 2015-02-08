@@ -88,8 +88,6 @@ bool WordsScene::init()
     sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     this->addChild(sprite, 0);
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
-    
     return true;
 }
 

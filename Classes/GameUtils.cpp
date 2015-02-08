@@ -44,7 +44,7 @@ std::string GameUtils::getBGsource()
     }
     else
     {
-        bgSource = "background.png";
+        bgSource = "iDefault.png";
     }
     
     return bgSource;

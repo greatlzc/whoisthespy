@@ -89,7 +89,7 @@ bool PlayingScene::init()
     Banker::getInstance()->resetPlayers();
     Banker::getInstance()->shuffle();
     
-    auto sample = Label::create("sample", "Arial", 60);
+    auto sample = Label::createWithSystemFont("sample", "Arial", 60);
     auto originX = ORIGIN_X + WIDTH/6;
     auto originY = ORIGIN_Y + HEIGHT/1.4;
     auto marginX = WIDTH/3;
@@ -123,7 +123,6 @@ bool PlayingScene::init()
         this->addChild(pMenu, 1);
     }
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
     
     scheduleUpdate();
@@ -208,7 +207,7 @@ void PlayingScene::update(float dt)
     //check if game is ending per second
     if (isGameEnded) {
         auto resultScene = ResultScene::createScene();
-        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
         Director::getInstance()->replaceScene(resultScene);
     }
 }
@@ -221,7 +220,7 @@ bool ForgotDialog::init()
     {
         return false;
     }
-    forgot = Sprite::create("forgot.png");
+    forgot = Sprite::create("rank.png");
     forgot->setScale(1.5);
     forgot->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     this->addChild(forgot, 1);

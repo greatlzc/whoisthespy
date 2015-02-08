@@ -50,7 +50,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // create a scene. it's an autorelease object
     auto scene = StartScene::createScene();
     
-    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("contra_title.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("opening.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("ending.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Falcom Sound Team jdk - TRINITY.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-30.mp3");
     // run
     director->runWithScene(scene);
 

@@ -209,7 +209,7 @@ bool ResultScene::init()
     this->addChild(no4scorelabel);
     this->addChild(no5scorelabel);
     
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("button-28.wav");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ending.mp3");
     
     return true;
 }
@@ -219,6 +219,7 @@ void ResultScene::menuStartCallback(Ref* pSender)
 {
     //to do
     auto wordsScene = WordsScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, wordsScene));
 }
@@ -229,6 +230,7 @@ void ResultScene::menuStopCallback(Ref* pSender)
     Banker::getInstance()->resetGame();
     
     auto startScene = StartScene::createScene();
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("button-28.wav");
     Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, startScene));
 }
