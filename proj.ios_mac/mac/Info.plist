@@ -35,7 +35,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>fonts/yuweij.ttf</string>
-		<string>fonts/FZJingLeiS-R-GB.ttf</string>
 	</array>
 </dict>
 </plist>
