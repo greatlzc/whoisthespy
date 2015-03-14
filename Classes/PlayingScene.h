@@ -27,8 +27,6 @@ public:
     
     friend class ForgotDialog;
     friend class KillDialog;
-    // a selector callback
-    void menuStartCallback(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(PlayingScene);
@@ -42,6 +40,7 @@ public:
     void update(float dt);
 };
 
+//a DoModal dialog for forgetting word
 class ForgotDialog : public cocos2d::Layer
 {
 public:
@@ -52,12 +51,13 @@ public:
     void OnForgotWord(Ref* pSender);
     
 private:
-    cocos2d::Sprite* forgot;
+    cocos2d::Sprite* forgotLabel;
     cocos2d::Label* word;
     cocos2d::Label* info;
     bool doModal;
 };
 
+//a DoModal dialog for killing one player
 class KillDialog : public cocos2d::Layer
 {
 public:
@@ -68,10 +68,14 @@ public:
     void OnKillPlayer(Ref* pSender);
     
 private:
-    cocos2d::Sprite* kill;
+    cocos2d::Sprite* killLabel;
     cocos2d::Label* result;
     cocos2d::Label* info;
     bool doModal;
 };
+
+#define NO_PLAYING_SCENE 1
+#define NO_FORGOT_DIALOG 2
+#define NO_KILL_DIALOG   3
 
 #endif /* defined(__HelloWorldDemo__PlayingScene__) */

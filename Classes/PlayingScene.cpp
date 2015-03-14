@@ -20,16 +20,18 @@ Scene* PlayingScene::createScene()
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = PlayingScene::create();
-    layer->setTag(1);
-    auto forgot = ForgotDialog::create();
-    forgot->setTag(2);
-    auto kill = KillDialog::create();
-    kill->setTag(3);
+    auto playingScene = PlayingScene::create();
+    playingScene->setTag(NO_PLAYING_SCENE);
+    auto forgotScene = ForgotDialog::create();
+    forgotScene->setTag(NO_FORGOT_DIALOG);
+    auto killScene = KillDialog::create();
+    killScene->setTag(NO_KILL_DIALOG);
+    
     // add layer as a child to scene
-    scene->addChild(layer, 1);
-    scene->addChild(forgot, 2);
-    scene->addChild(kill, 3);
+    scene->addChild(playingScene, 1);
+    scene->addChild(forgotScene, 2);
+    scene->addChild(killScene, 3);
+    
     // return the scene
     return scene;
 }
@@ -45,45 +47,46 @@ bool PlayingScene::init()
     }
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    sprite->setTag(-4);
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    background->setTag(-4);
+    this->addChild(background, 0);
     
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 60;
-    auto forgot_label = Label::createWithTTF(menu_title, "<看词>");
-    forgot_label->setColor(Color3B::BLACK);
-    forgot_label->setPosition(Vec2(ORIGIN_X + WIDTH/3,
+    TTFConfig menuTitle;
+    menuTitle.fontFilePath = "yuweij.ttf";
+    menuTitle.fontSize = 60;
+    
+    auto forgotLabel = Label::createWithTTF(menuTitle, "<看词>");
+    forgotLabel->setColor(Color3B::BLACK);
+    forgotLabel->setPosition(Vec2(ORIGIN_X + WIDTH/3,
                                   ORIGIN_Y + HEIGHT/7));
-    this->addChild(forgot_label, 2);
+    this->addChild(forgotLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(70);
     auto forgotItem = MenuItemFont::create("       ", CC_CALLBACK_1(PlayingScene::OnForgotWord, this));
     
-    auto forgot_menu = Menu::create(forgotItem, NULL);
-    forgot_menu->setPosition(Vec2(ORIGIN_X + WIDTH/3,
+    auto forgotMenu = Menu::create(forgotItem, NULL);
+    forgotMenu->setPosition(Vec2(ORIGIN_X + WIDTH/3,
                                  ORIGIN_Y + HEIGHT/7));
-    forgot_menu->setTag(-2);
-    this->addChild(forgot_menu, 1);
+    forgotMenu->setTag(-2);
+    this->addChild(forgotMenu, 1);
     
-    auto kill_label = Label::createWithTTF(menu_title, "<投之>");
-    kill_label->setColor(Color3B::BLACK);
-    kill_label->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
+    auto killLable = Label::createWithTTF(menuTitle, "<投之>");
+    killLable->setColor(Color3B::BLACK);
+    killLable->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
                                  ORIGIN_Y + HEIGHT/7));
-    this->addChild(kill_label, 2);
+    this->addChild(killLable, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(60);
     auto killItem = MenuItemFont::create("       ", CC_CALLBACK_1(PlayingScene::OnKillPlayer, this));
     
-    auto kill_menu = Menu::create(killItem, NULL);
-    kill_menu->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
+    auto killMenu = Menu::create(killItem, NULL);
+    killMenu->setPosition(Vec2(ORIGIN_X + WIDTH*2/3,
                                 ORIGIN_Y + HEIGHT/7));
-    kill_menu->setTag(-3);
-    this->addChild(kill_menu, 1);
+    killMenu->setTag(-3);
+    this->addChild(killMenu, 1);
     
     //relive all players and dispatch role
     Banker::getInstance()->resetPlayers();
@@ -96,14 +99,14 @@ bool PlayingScene::init()
     auto marginY = sample->getContentSize().height*2;
     
     //add players name on screen, 3 colums at most considering the name length
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
-    title.fontSize = 60;
+    TTFConfig nameTitle;
+    nameTitle.fontFilePath = "yuweij.ttf";
+    nameTitle.fontSize = 60;
     int nPlayers = Banker::getInstance()->playerCount();
     for (int i = 0; i < nPlayers; i++)
     {
         auto pName = Banker::getInstance()->mPlayers.at(i)->mName;
-        auto pLabel = Label::createWithTTF(title, pName);
+        auto pLabel = Label::createWithTTF(nameTitle, pName);
         pLabel->setColor(Color3B::BLACK);
         pLabel->setPosition(Vec2(originX + (i%3)*marginX, originY - (i/3)*marginY));
         pLabel->setTag(i);
@@ -116,6 +119,7 @@ bool PlayingScene::init()
         auto pName = Banker::getInstance()->mPlayers.at(i)->mName;
         auto pLabel = MenuItemFont::create(pName, CC_CALLBACK_1(PlayingScene::OnNameTouched, this, i));
         auto pMenu = Menu::create(pLabel, NULL);
+        
         //pMenu->setColor(Color3B::WHITE);
         pMenu->setPosition(Vec2(originX + (i%3)*marginX, originY - (i/3)*marginY));
         pMenu->setOpacity(0);
@@ -129,13 +133,6 @@ bool PlayingScene::init()
     return true;
 }
 
-
-void PlayingScene::menuStartCallback(Ref* pSender)
-{
-    auto resultScene = ResultScene::createScene();
-    Director::getInstance()->replaceScene(TransitionProgressRadialCW::create(1.2, resultScene));
-}
-
 void PlayingScene::OnForgotWord(Ref* pSender)
 {
     if (mPlayerSelected < 0) {
@@ -147,14 +144,14 @@ void PlayingScene::OnForgotWord(Ref* pSender)
     }
     
     //make background grey
-    for (Node* n : this->getChildren()) {
-        if (n->getTag() < 10) {
-            n->setOpacity(150);
+    for (Node* node : this->getChildren()) {
+        if (node->getTag() < 10) {
+            node->setOpacity(150);
         }
     }
     
-    auto dialog = (ForgotDialog*)this->getParent()->getChildByTag(2);
-    dialog->OnForgotWord(this);
+    auto forgotDialog = (ForgotDialog*)this->getParent()->getChildByTag(NO_FORGOT_DIALOG);
+    forgotDialog->OnForgotWord(this);
 }
 
 void PlayingScene::OnKillPlayer(Ref* pSender)
@@ -183,8 +180,8 @@ void PlayingScene::OnKillPlayer(Ref* pSender)
         }
     }
     
-    auto dialog = (KillDialog*)this->getParent()->getChildByTag(3);
-    dialog->OnKillPlayer(this);
+    auto killDialog = (KillDialog*)this->getParent()->getChildByTag(NO_KILL_DIALOG);
+    killDialog->OnKillPlayer(this);
 }
 
 void PlayingScene::OnNameTouched(Ref* pSender, int seq)
@@ -220,26 +217,26 @@ bool ForgotDialog::init()
     {
         return false;
     }
-    forgot = Sprite::create("rank.png");
-    forgot->setScale(1.5);
-    forgot->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    this->addChild(forgot, 1);
-    forgot->setVisible(false);
+    forgotLabel = Sprite::create("label.png");
+    forgotLabel->setScale(1.5);
+    forgotLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    this->addChild(forgotLabel, 1);
+    forgotLabel->setVisible(false);
     
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
-    title.fontSize = 50;
+    TTFConfig wordTTF;
+    wordTTF.fontFilePath = "yuweij.ttf";
+    wordTTF.fontSize = 50;
     
-    word = Label::createWithTTF(title, "");
+    word = Label::createWithTTF(wordTTF, "");
     word->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
     word->setColor(Color3B::BLACK);
     this->addChild(word, 2);
     word->setVisible(false);
     
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 60;
-    info = Label::createWithTTF(menu_title, "你的关键词是：");
+    TTFConfig menuTitle;
+    menuTitle.fontFilePath = "yuweij.ttf";
+    menuTitle.fontSize = 60;
+    info = Label::createWithTTF(menuTitle, "你的关键词是：");
     info->setColor(Color3B::BLACK);
     info->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/1.1));
     this->addChild(info, 2);
@@ -249,8 +246,8 @@ bool ForgotDialog::init()
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
-        Vec2 locationInNode = forgot->convertToNodeSpace(touch->getLocation());
-        Size s = forgot->getContentSize();
+        Vec2 locationInNode = forgotLabel->convertToNodeSpace(touch->getLocation());
+        Size s = forgotLabel->getContentSize();
         Rect rect = Rect(0, 0, s.width, s.height);
         if (rect.containsPoint(locationInNode) && doModal)
         {
@@ -260,16 +257,22 @@ bool ForgotDialog::init()
     };
     touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
         word->setVisible(false);
-        forgot->setVisible(false);
+        forgotLabel->setVisible(false);
         info->setVisible(false);
-        auto layer = this->getParent()->getChildByTag(1);
-        for (Node* n : layer->getChildren())
+        
+        //get the playing scene
+        auto playingScene = this->getParent()->getChildByTag(NO_PLAYING_SCENE);
+        
+        //set opacity back
+        for (Node* node : playingScene->getChildren())
         {
-            if (n->getTag() < 10)
+            if (node->getTag() < 10)
             {
-                n->setOpacity(255);
+                node->setOpacity(255);
             }
         }
+        
+        //remove touch eventlistener when this dialog disappear
         this->_eventDispatcher->removeEventListenersForTarget(this);
         doModal = false;
     };
@@ -282,7 +285,7 @@ bool ForgotDialog::init()
 
 void ForgotDialog::OnForgotWord(Ref* pSender)
 {
-    forgot->setVisible(true);
+    forgotLabel->setVisible(true);
     word->setVisible(true);
     info->setVisible(true);
     auto layer = (PlayingScene*)pSender;
@@ -290,12 +293,13 @@ void ForgotDialog::OnForgotWord(Ref* pSender)
     std::string pWord = Banker::getInstance()->getWordbyName(pName);
     word->setString(pWord);
     doModal = true;
+    
     //forgotten word will show, touch to return
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
-        Vec2 locationInNode = forgot->convertToNodeSpace(touch->getLocation());
-        Size s = forgot->getContentSize();
+        Vec2 locationInNode = forgotLabel->convertToNodeSpace(touch->getLocation());
+        Size s = forgotLabel->getContentSize();
         Rect rect = Rect(0, 0, s.width, s.height);
         if (rect.containsPoint(locationInNode) && doModal)
         {
@@ -305,16 +309,22 @@ void ForgotDialog::OnForgotWord(Ref* pSender)
     };
     touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
         word->setVisible(false);
-        forgot->setVisible(false);
+        forgotLabel->setVisible(false);
         info->setVisible(false);
-        auto layer = this->getParent()->getChildByTag(1);
-        for (Node* n : layer->getChildren())
+        
+        //get the playing scene
+        auto playingScene = this->getParent()->getChildByTag(NO_PLAYING_SCENE);
+        
+        //set opacity back
+        for (Node* node : playingScene->getChildren())
         {
-            if (n->getTag() < 10)
+            if (node->getTag() < 10)
             {
-                n->setOpacity(255);
+                node->setOpacity(255);
             }
         }
+        
+        //remove touch eventlistener when this dialog disappear
         this->_eventDispatcher->removeEventListenersForTarget(this);
         doModal = false;
     };
@@ -338,10 +348,10 @@ bool KillDialog::init()
     std::string spy = std::to_string(livingSpy);
     std::string lucky = std::to_string(livingLucky);
     
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
-    title.fontSize = 48;
-    info = Label::createWithTTF(title, "当前：平民 " + guy + " 人" +
+    TTFConfig infoTTF;
+    infoTTF.fontFilePath = "yuweij.ttf";
+    infoTTF.fontSize = 48;
+    info = Label::createWithTTF(infoTTF, "当前：平民 " + guy + " 人" +
                                      "    " +
                                      "卧底 " + spy + " 人" +
                                      "    " +
@@ -351,15 +361,16 @@ bool KillDialog::init()
     this->addChild(info, 2);
     info->setVisible(false);
     
-    kill = Sprite::create("rank.png");
-    kill->setScale(1.5);
-    kill->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
-    this->addChild(kill, 1);
-    kill->setVisible(false);
+    killLabel = Sprite::create("label.png");
+    killLabel->setScale(1.5);
+    killLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
+    this->addChild(killLabel, 1);
+    killLabel->setVisible(false);
     
-    title.fontSize = 50;
-    
-    result = Label::createWithTTF(title, "");
+    TTFConfig resultTTF;
+    resultTTF.fontFilePath = "yuweij.ttf";
+    resultTTF.fontSize = 50;
+    result = Label::createWithTTF(resultTTF, "");
     
     result->setColor(Color3B::BLACK);
     result->setPosition(Vec2(ORIGIN_X + WIDTH/2, ORIGIN_Y + HEIGHT/2));
@@ -370,8 +381,8 @@ bool KillDialog::init()
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
-        Vec2 locationInNode = kill->convertToNodeSpace(touch->getLocation());
-        Size s = kill->getContentSize();
+        Vec2 locationInNode = killLabel->convertToNodeSpace(touch->getLocation());
+        Size s = killLabel->getContentSize();
         Rect rect = Rect(0, 0, s.width, s.height);
         if (rect.containsPoint(locationInNode) && doModal)
         {
@@ -381,20 +392,26 @@ bool KillDialog::init()
     };
     touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
         result->setVisible(false);
-        kill->setVisible(false);
+        killLabel->setVisible(false);
         info->setVisible(false);
-        auto layer = (PlayingScene*)this->getParent()->getChildByTag(1);
-        for (Node* n : layer->getChildren())
+        
+        //get the playing scene
+        auto playing_scene = (PlayingScene*)this->getParent()->getChildByTag(NO_PLAYING_SCENE);
+        
+        //set opacity back
+        for (Node* node : playing_scene->getChildren())
         {
-            if (n->getTag() < 10)
+            if (node->getTag() < 10)
             {
-                n->setOpacity(255);
+                node->setOpacity(255);
             }
         }
         doModal = false;
         if (Banker::getInstance()->GameEnding() != UNDEFINED) {
-            layer->isGameEnded = true;
+            playing_scene->isGameEnded = true;
         }
+        
+        //remove touch eventlistener when this dialog disappear
         this->_eventDispatcher->removeEventListenersForTarget(this);
     };
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
@@ -406,7 +423,7 @@ bool KillDialog::init()
 
 void KillDialog::OnKillPlayer(Ref* pSender)
 {
-    kill->setVisible(true);
+    killLabel->setVisible(true);
     result->setVisible(true);
     info->setVisible(true);
     
@@ -443,8 +460,8 @@ void KillDialog::OnKillPlayer(Ref* pSender)
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->setSwallowTouches(true);
     touchListener->onTouchBegan = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
-        Vec2 locationInNode = kill->convertToNodeSpace(touch->getLocation());
-        Size s = kill->getContentSize();
+        Vec2 locationInNode = killLabel->convertToNodeSpace(touch->getLocation());
+        Size s = killLabel->getContentSize();
         Rect rect = Rect(0, 0, s.width, s.height);
         if (rect.containsPoint(locationInNode) && doModal)
         {
@@ -454,20 +471,27 @@ void KillDialog::OnKillPlayer(Ref* pSender)
     };
     touchListener->onTouchEnded = [=](cocos2d::Touch* touch, cocos2d::Event * event) {
         result->setVisible(false);
-        kill->setVisible(false);
+        killLabel->setVisible(false);
         info->setVisible(false);
-        auto layer = (PlayingScene*)this->getParent()->getChildByTag(1);
-        for (Node* n : layer->getChildren())
+        
+        //get the playing scene
+        auto playingScene = this->getParent()->getChildByTag(NO_PLAYING_SCENE);
+        
+        //set opacity back
+        for (Node* node : playingScene->getChildren())
         {
-            if (n->getTag() < 10)
+            if (node->getTag() < 10)
             {
-                n->setOpacity(255);
+                node->setOpacity(255);
             }
         }
+        
         doModal = false;
         if (Banker::getInstance()->GameEnding() != UNDEFINED) {
             layer->isGameEnded = true;
         }
+        
+        //remove touch eventlistener when this dialog disappear
         this->_eventDispatcher->removeEventListenersForTarget(this);
     };
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);

@@ -109,7 +109,7 @@
 		3CF0AB7E1A87470200929AA5 /* libwebp_arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF0AB7D1A87470200929AA5 /* libwebp_arm64.a */; };
 		3CF0AB831A87835900929AA5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF0AB821A87835900929AA5 /* Default-568h@2x.png */; };
 		3CF0AB841A87835900929AA5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF0AB821A87835900929AA5 /* Default-568h@2x.png */; };
-		3CF4F8471A62558800D5E2E4 /* rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4F8451A62558800D5E2E4 /* rank.png */; };
+		3CF4F8471A62558800D5E2E4 /* label.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4F8451A62558800D5E2E4 /* label.png */; };
 		3CF8D7E91A4320670073EAC4 /* WordsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */; };
 		3CF8D7EA1A4320670073EAC4 /* WordsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
@@ -350,7 +350,7 @@
 		3CF0AB7B1A8746EB00929AA5 /* libcurl_arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl_arm64.a; path = ../cocos2d/external/curl/prebuilt/ios/libcurl_arm64.a; sourceTree = "<group>"; };
 		3CF0AB7D1A87470200929AA5 /* libwebp_arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp_arm64.a; path = ../cocos2d/external/webp/prebuilt/ios/libwebp_arm64.a; sourceTree = "<group>"; };
 		3CF0AB821A87835900929AA5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		3CF4F8451A62558800D5E2E4 /* rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank.png; sourceTree = "<group>"; };
+		3CF4F8451A62558800D5E2E4 /* label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label.png; sourceTree = "<group>"; };
 		3CF8D7E71A4320670073EAC4 /* WordsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WordsManager.cpp; path = ../Classes/WordsManager.cpp; sourceTree = "<group>"; };
 		3CF8D7E81A4320670073EAC4 /* WordsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordsManager.h; path = ../Classes/WordsManager.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
@@ -638,7 +638,7 @@
 				3C53A92E1A7D274300BD3D97 /* dead.png */,
 				3CB010F31A794AD200DFB268 /* button-30.mp3 */,
 				3C4400801A77E1FF00876D7B /* button-28.wav */,
-				3CF4F8451A62558800D5E2E4 /* rank.png */,
+				3CF4F8451A62558800D5E2E4 /* label.png */,
 				3C230A1B1A4B1B46009D0B14 /* fonts */,
 			);
 			name = Resources;
@@ -829,7 +829,7 @@
 				3CF0AB5E1A81123E00929AA5 /* Default.png in Resources */,
 				3C9F645A1A8A418B00CD8305 /* Icon-40.png in Resources */,
 				3C4400771A74CB8700876D7B /* yuweij.ttf in Resources */,
-				3CF4F8471A62558800D5E2E4 /* rank.png in Resources */,
+				3CF4F8471A62558800D5E2E4 /* label.png in Resources */,
 				3C9F64641A8A418B00CD8305 /* Icon-76.png in Resources */,
 				3CF0AB5B1A7FDAFA00929AA5 /* Default@2x.png in Resources */,
 				3C9BA5481A87B6E5009B5ACF /* opening.mp3 in Resources */,

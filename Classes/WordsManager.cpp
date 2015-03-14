@@ -142,6 +142,10 @@ void WordsManager::init()
     addWord("李秋水", "李莫愁");
     addWord("命中注定", "青梅竹马");
     addWord("手臂", "胳膊");
+    addWord("58同城", "赶集网");
+    addWord("核桃", "榛子");
+    addWord("耳机", "耳麦");
+    addWord("健身", "锻炼");
 }
 
 void WordsManager::addWord(std::string g, std::string s)
