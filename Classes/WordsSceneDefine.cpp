@@ -39,10 +39,10 @@ bool WordsSceneDefine::init()
         return false;
     }
     
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 70;
-    auto menu_label = Label::createWithTTF(menu_title, "<继续>");
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 70;
+    auto menu_label = Label::createWithTTF(title, "<继续>");
     menu_label->setColor(Color3B::BLACK);
     menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/7));
@@ -57,8 +57,6 @@ bool WordsSceneDefine::init()
                            ORIGIN_Y + HEIGHT/7));
     this->addChild(menu, 1);
     
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
     title.fontSize = 96;
     auto label = Label::createWithTTF(title, "输入词语");
     label->setColor(Color3B::BLACK);
@@ -72,7 +70,7 @@ bool WordsSceneDefine::init()
     guy->setColor(Color3B::BLACK);
     guy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                              ORIGIN_Y + HEIGHT/1.8));
-    guy->setTag(1);
+    guy->setTag(NO_GUY_INPUT);
     guy->setDelegate(this);
     this->addChild(guy, 2);
     
@@ -80,7 +78,7 @@ bool WordsSceneDefine::init()
     spy->setColor(Color3B::BLACK);
     spy->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                           ORIGIN_X + HEIGHT/2.8));
-    spy->setTag(2);
+    spy->setTag(NO_SPY_INPUT);
     spy->setDelegate(this);
     this->addChild(spy, 2);
     
@@ -88,25 +86,25 @@ bool WordsSceneDefine::init()
     MenuItemFont::setFontSize(70);
     
     //invisible menu for 平民 word
-    auto blank1 = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 1));
-    auto blank_menu1 = Menu::create(blank1, NULL);
-    blank_menu1->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    auto blankGuyMenuItem = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 1));
+    auto blankGuyMenu = Menu::create(blankGuyMenuItem, NULL);
+    blankGuyMenu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/1.8));
-    this->addChild(blank_menu1);
+    this->addChild(blankGuyMenu);
     
     //invisible menu for 卧底 word
-    auto blank2 = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 2));
-    auto blank_menu2 = Menu::create(blank2, NULL);
-    blank_menu2->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    auto blankSpyMenuItem = MenuItemFont::create("                          ", CC_CALLBACK_1(WordsSceneDefine::textFieldPressed, this, 2));
+    auto blankSpyMenu = Menu::create(blankSpyMenuItem, NULL);
+    blankSpyMenu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                   spy->getPositionY()));
-    this->addChild(blank_menu2);
+    this->addChild(blankSpyMenu);
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    this->addChild(background, 0);
     //scheduleUpdate();
     return true;
 }
@@ -114,8 +112,8 @@ bool WordsSceneDefine::init()
 
 void WordsSceneDefine::menuStartCallback(Ref* pSender)
 {
-    auto gWord = (TextFieldTTF*)this->getChildByTag(1);
-    auto sWord = (TextFieldTTF*)this->getChildByTag(2);
+    auto gWord = (TextFieldTTF*)this->getChildByTag(NO_GUY_INPUT);
+    auto sWord = (TextFieldTTF*)this->getChildByTag(NO_SPY_INPUT);
     if (gWord->getString() == "" || sWord->getString() == "")
     {
         return;
@@ -142,12 +140,12 @@ bool WordsSceneDefine::onTextFieldDetachWithIME(TextFieldTTF* sender)
 void WordsSceneDefine::textFieldPressed(Ref* pSender, int index)
 {
     if (index == 1) {
-        auto text = (TextFieldTTF*)this->getChildByTag(1);
+        auto text = (TextFieldTTF*)this->getChildByTag(NO_GUY_INPUT);
         text->attachWithIME();
     }
     else if (index == 2)
     {
-        auto text = (TextFieldTTF*)this->getChildByTag(2);
+        auto text = (TextFieldTTF*)this->getChildByTag(NO_SPY_INPUT);
         text->attachWithIME();
     }
 }

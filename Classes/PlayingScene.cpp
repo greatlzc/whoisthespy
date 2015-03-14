@@ -120,7 +120,6 @@ bool PlayingScene::init()
         auto pLabel = MenuItemFont::create(pName, CC_CALLBACK_1(PlayingScene::OnNameTouched, this, i));
         auto pMenu = Menu::create(pLabel, NULL);
         
-        //pMenu->setColor(Color3B::WHITE);
         pMenu->setPosition(Vec2(originX + (i%3)*marginX, originY - (i/3)*marginY));
         pMenu->setOpacity(0);
         pMenu->setTag(i + 10);

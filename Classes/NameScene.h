@@ -43,4 +43,7 @@ public:
     void update(float dt);
 };
 
+#define NO_TITLE      1
+#define NO_INPUT_AREA 2
+
 #endif /* defined(__HelloWorldDemo__NameScene__) */

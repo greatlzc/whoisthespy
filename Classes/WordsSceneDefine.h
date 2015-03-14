@@ -41,4 +41,7 @@ public:
     void textFieldPressed(Ref* pSender, int index);
 };
 
+#define NO_GUY_INPUT 1
+#define NO_SPY_INPUT 2
+
 #endif /* defined(__HelloWorldDemo__WordsScene__) */

@@ -38,14 +38,14 @@ bool RoleScene::init()
         return false;
     }
 
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 70;
-    auto menu_label = Label::createWithTTF(menu_title, "<继续>");
-    menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    TTFConfig menuTitle;
+    menuTitle.fontFilePath = "yuweij.ttf";
+    menuTitle.fontSize = 70;
+    auto menuLabel = Label::createWithTTF(menuTitle, "<继续>");
+    menuLabel->setColor(Color3B::BLACK);
+    menuLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/8));
-    this->addChild(menu_label, 2);
+    this->addChild(menuLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(RoleScene::menuStartCallback, this));
@@ -162,11 +162,11 @@ bool RoleScene::init()
     this->addChild(n_add_menu, 1);
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    this->addChild(background, 0);
     
     return true;
 }

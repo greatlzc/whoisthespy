@@ -40,68 +40,68 @@ bool ResultScene::init()
         return false;
     }
    
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 56;
-    auto start_label = Label::createWithTTF(menu_title, "<重来>");
-    start_label->setColor(Color3B::BLACK);
-    start_label->setPosition(Vec2(ORIGIN_X + start_label->getContentSize().width/2,
+    TTFConfig menuTitle;
+    menuTitle.fontFilePath = "yuweij.ttf";
+    menuTitle.fontSize = 56;
+    auto startLabel = Label::createWithTTF(menuTitle, "<重来>");
+    startLabel->setColor(Color3B::BLACK);
+    startLabel->setPosition(Vec2(ORIGIN_X + startLabel->getContentSize().width/2,
                                  ORIGIN_Y + HEIGHT/10));
-    this->addChild(start_label, 2);
+    this->addChild(startLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(56);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStartCallback, this));
     
-    auto start_menu = Menu::create(startItem, NULL);
-    start_menu->setPosition(Vec2(ORIGIN_X + start_label->getContentSize().width/2,
+    auto startMenu = Menu::create(startItem, NULL);
+    startMenu->setPosition(Vec2(ORIGIN_X + startLabel->getContentSize().width/2,
                            ORIGIN_Y + HEIGHT/10));
-    this->addChild(start_menu, 1);
+    this->addChild(startMenu, 1);
     
-    auto stop_label = Label::createWithTTF(menu_title, "<返回>");
-    stop_label->setColor(Color3B::BLACK);
-    stop_label->setPosition(Vec2(ORIGIN_X + WIDTH - stop_label->getContentSize().width/2,
+    auto stopLabel = Label::createWithTTF(menuTitle, "<返回>");
+    stopLabel->setColor(Color3B::BLACK);
+    stopLabel->setPosition(Vec2(ORIGIN_X + WIDTH - stopLabel->getContentSize().width/2,
                                  ORIGIN_Y + HEIGHT/10));
-    this->addChild(stop_label, 2);
+    this->addChild(stopLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(56);
     auto stopItem = MenuItemFont::create("      ", CC_CALLBACK_1(ResultScene::menuStopCallback, this));
     
-    auto stop_menu = Menu::create(stopItem, NULL);
-    stop_menu->setPosition(Vec2(ORIGIN_X + WIDTH - stop_label->getContentSize().width/2,
+    auto stopMenu = Menu::create(stopItem, NULL);
+    stopMenu->setPosition(Vec2(ORIGIN_X + WIDTH - stopLabel->getContentSize().width/2,
                            ORIGIN_Y + HEIGHT/10));
-    this->addChild(stop_menu, 1);
+    this->addChild(stopMenu, 1);
     
     TTFConfig title;
     title.fontFilePath = "yuweij.ttf";
     title.fontSize = 90;
     
-    auto label = Label::createWithTTF(title, "谁赢了？");
+    auto resultLabel = Label::createWithTTF(title, "谁赢了？");
     switch (Banker::getInstance()->GameEnding()) {
         case GUY:
-            label->setString("平民赢了！");
+            resultLabel->setString("平民赢了！");
             break;
         case SPY:
-            label->setString("卧底赢了！");
+            resultLabel->setString("卧底赢了！");
             break;
         case LUCKY:
-            label->setString("白板赢了！");
+            resultLabel->setString("白板赢了！");
             break;
         default:
             break;
     }
-    label->setColor(Color3B::BLACK);
-    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    resultLabel->setColor(Color3B::BLACK);
+    resultLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                             ORIGIN_Y + HEIGHT/1.2));
     
     // add the label as a child to this layer
-    this->addChild(label, 1);
+    this->addChild(resultLabel, 1);
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    this->addChild(background, 0);
     
     Banker::getInstance()->accounting(Banker::getInstance()->GameEnding());
     Banker::getInstance()->rankPlayers();
@@ -140,15 +140,15 @@ bool ResultScene::init()
         no1score = std::to_string(Banker::getInstance()->mPlayers.at(0)->mScore);
     }
 
-    TTFConfig rank;
-    rank.fontFilePath = "yuweij.ttf";
-    rank.fontSize = 64;
+    TTFConfig rankTTF;
+    rankTTF.fontFilePath = "yuweij.ttf";
+    rankTTF.fontSize = 64;
     
-    auto no1label = Label::createWithTTF(rank, "一 " + no1name);
-    auto no2label = Label::createWithTTF(rank, "二 " + no2name);
-    auto no3label = Label::createWithTTF(rank, "三 " + no3name);
-    auto no4label = Label::createWithTTF(rank, "四 " + no4name);
-    auto no5label = Label::createWithTTF(rank, "五 " + no5name);
+    auto no1label = Label::createWithTTF(rankTTF, "一 " + no1name);
+    auto no2label = Label::createWithTTF(rankTTF, "二 " + no2name);
+    auto no3label = Label::createWithTTF(rankTTF, "三 " + no3name);
+    auto no4label = Label::createWithTTF(rankTTF, "四 " + no4name);
+    auto no5label = Label::createWithTTF(rankTTF, "五 " + no5name);
     
     auto originX = ORIGIN_X + WIDTH/4;
     auto originY = ORIGIN_Y + HEIGHT/1.7;
@@ -179,11 +179,11 @@ bool ResultScene::init()
     this->addChild(no4label);
     this->addChild(no5label);
     
-    auto no1scorelabel = Label::createWithTTF(rank, no1score);
-    auto no2scorelabel = Label::createWithTTF(rank, no2score);
-    auto no3scorelabel = Label::createWithTTF(rank, no3score);
-    auto no4scorelabel = Label::createWithTTF(rank, no4score);
-    auto no5scorelabel = Label::createWithTTF(rank, no5score);
+    auto no1scorelabel = Label::createWithTTF(rankTTF, no1score);
+    auto no2scorelabel = Label::createWithTTF(rankTTF, no2score);
+    auto no3scorelabel = Label::createWithTTF(rankTTF, no3score);
+    auto no4scorelabel = Label::createWithTTF(rankTTF, no4score);
+    auto no5scorelabel = Label::createWithTTF(rankTTF, no5score);
     
     no1scorelabel->setAnchorPoint(Vec2(0, 0));
     no2scorelabel->setAnchorPoint(Vec2(0, 0));

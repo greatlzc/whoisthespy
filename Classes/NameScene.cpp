@@ -39,14 +39,14 @@ bool NameScene::init()
         return false;
     }
     
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 70;
-    auto menu_label = Label::createWithTTF(menu_title, "<继续>");
-    menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    TTFConfig title;
+    title.fontFilePath = "yuweij.ttf";
+    title.fontSize = 70;
+    auto menuLabel = Label::createWithTTF(title, "<继续>");
+    menuLabel->setColor(Color3B::BLACK);
+    menuLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/5));
-    this->addChild(menu_label, 2);
+    this->addChild(menuLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(NameScene::menuStartCallback, this));
@@ -57,41 +57,39 @@ bool NameScene::init()
                            ORIGIN_Y + HEIGHT/5));
     this->addChild(menu, 1);
     
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
     title.fontSize = 90;
     auto label = Label::createWithTTF(title, "依次输入姓名");
     label->setColor(Color3B::BLACK);
     label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                             ORIGIN_Y + HEIGHT/1.3));
-    label->setTag(1);
+    label->setTag(NO_TITLE);
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    TextFieldTTF* text = TextFieldTTF::textFieldWithPlaceHolder("{ 点击此处输入 }", "Menlo", 70);
-    text->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    TextFieldTTF* input = TextFieldTTF::textFieldWithPlaceHolder("{ 点击此处输入 }", "Menlo", 70);
+    input->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                            ORIGIN_Y + HEIGHT/2));
-    text->setColor(Color3B::BLACK);
-    text->setColorSpaceHolder(Color3B::BLACK);
-    text->setTag(2);
-    text->setDelegate(this);
-    this->addChild(text, 2);
+    input->setColor(Color3B::BLACK);
+    input->setColorSpaceHolder(Color3B::BLACK);
+    input->setTag(NO_INPUT_AREA);
+    input->setDelegate(this);
+    this->addChild(input, 2);
     
     //an invisible menu for the textfield
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
     auto blank = MenuItemFont::create("                          ", CC_CALLBACK_1(NameScene::textFieldPressed, this));
-    auto blank_menu = Menu::create(blank, NULL);
-    blank_menu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    auto blankMenu = Menu::create(blank, NULL);
+    blankMenu->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/2));
-    this->addChild(blank_menu);
+    this->addChild(blankMenu);
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    this->addChild(background, 0);
     
     scheduleUpdate();
     return true;
@@ -129,14 +127,14 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
     //move back
     this->setPosition(Vec2(0, 0));
     
-    auto text = (TextFieldTTF*)this->getChildByTag(2);
+    auto text = (TextFieldTTF*)this->getChildByTag(NO_INPUT_AREA);
     if (text->getString().find(" ") != std::string::npos) {
         auto text = (Label*)this->getChildByTag(1);
         text->setString("输入错误，名字不能包含空格");
         return false;
     }
     if (text->getString() == "") {
-        auto text = (Label*)this->getChildByTag(1);
+        auto text = (Label*)this->getChildByTag(NO_TITLE);
         text->setString("输入错误，名字不能为空");
         return false;
     }
@@ -149,7 +147,7 @@ bool NameScene::onTextFieldDetachWithIME(TextFieldTTF* sender)
 
 void NameScene::textFieldPressed(Ref* pSender)
 {
-    auto text = (TextFieldTTF*)this->getChildByTag(2);
+    auto text = (TextFieldTTF*)this->getChildByTag(NO_INPUT_AREA);
     text->attachWithIME();
 }
 
@@ -172,25 +170,20 @@ void NameScene::update(float dt)
     Banker::getInstance()->numLucky -
     Banker::getInstance()->playerCount();
     
-    auto text = (Label*)this->getChildByTag(1);
-    auto input = (TextFieldTTF*)this->getChildByTag(2);
+    auto label = (Label*)this->getChildByTag(NO_TITLE);
+    auto input = (TextFieldTTF*)this->getChildByTag(NO_INPUT_AREA);
     if (remain && 0 != Banker::getInstance()->playerCount()) {
-        if (text->getString() == "输入错误，名字不能包含空格" &&
+        if (label->getString() == "输入错误，名字不能包含空格" &&
             input->getString().find(" ") != std::string::npos)
         {
             return;
         }
-//        if (text->getString() == "输入错误，名字不能为空" &&
-//            input->getString() == "")
-//        {
-//            return;
-//        }
         std::stringstream ss;
         ss<<"尚需输入 "<<remain<<" 个";
-        text->setString(ss.str().c_str());
+        label->setString(ss.str().c_str());
     }
     else if (remain == 0) {
-        text->setString("输入完成");
+        label->setString("输入完成");
         input->setString(" ");
     }
 }

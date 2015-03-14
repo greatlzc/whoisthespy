@@ -38,14 +38,14 @@ bool StartScene::init()
         return false;
     }
 
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 70;
-    auto menu_label = Label::createWithTTF(menu_title, "<开始>");
-    menu_label->setColor(Color3B::BLACK);
-    menu_label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    TTFConfig menuTitle;
+    menuTitle.fontFilePath = "yuweij.ttf";
+    menuTitle.fontSize = 70;
+    auto menuLabel = Label::createWithTTF(menuTitle, "<开始>");
+    menuLabel->setColor(Color3B::BLACK);
+    menuLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                                  ORIGIN_Y + HEIGHT/4));
-    this->addChild(menu_label, 2);
+    this->addChild(menuLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(80);
     auto startItem = MenuItemFont::create("      ", CC_CALLBACK_1(StartScene::menuStartCallback, this));
@@ -56,25 +56,25 @@ bool StartScene::init()
                            ORIGIN_Y + HEIGHT/4));
     this->addChild(menu, 1);
     
-    TTFConfig title;
-    title.fontFilePath = "yuweij.ttf";
-    title.fontSize = 120;
-    auto label = Label::createWithTTF(title, "谁是卧底？");
-    label->setColor(Color3B::BLACK);
-    label->setPosition(Vec2(ORIGIN_X + WIDTH/2,
+    TTFConfig gameTitle;
+    gameTitle.fontFilePath = "yuweij.ttf";
+    gameTitle.fontSize = 120;
+    auto gameLabel = Label::createWithTTF(gameTitle, "谁是卧底？");
+    gameLabel->setColor(Color3B::BLACK);
+    gameLabel->setPosition(Vec2(ORIGIN_X + WIDTH/2,
                             ORIGIN_Y + HEIGHT/1.5));
     
     // add the label as a child to this layer
-    this->addChild(label, 1);
+    this->addChild(gameLabel, 1);
     
     // add "StartScene" splash screen"
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
     
     // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    this->addChild(background, 0);
     
     //reset word here
     WordsManager::getInstance()->init();

@@ -52,41 +52,39 @@ bool WordsScene::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
     
-    TTFConfig menu_title;
-    menu_title.fontFilePath = "yuweij.ttf";
-    menu_title.fontSize = 80;
-    auto define_label = Label::createWithTTF(menu_title, "|自定义|");
-    define_label->setColor(Color3B::BLACK);
-    define_label->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
-    this->addChild(define_label, 2);
+    ttf.fontSize = 80;
+    auto defineLabel = Label::createWithTTF(ttf, "|自定义|");
+    defineLabel->setColor(Color3B::BLACK);
+    defineLabel->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
+    this->addChild(defineLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(90);
     auto defineItem = MenuItemFont::create("          ", CC_CALLBACK_1(WordsScene::defineCallback, this));
     
     // create menu, it's an autorelease object
-    auto define_menu = Menu::create(defineItem, NULL);
-    define_menu->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
-    this->addChild(define_menu, 1);
+    auto defineMenu = Menu::create(defineItem, NULL);
+    defineMenu->setPosition(Vec2(label->getPositionX()/2, label->getPositionY()/2));
+    this->addChild(defineMenu, 1);
     
-    auto default_label = Label::createWithTTF(menu_title, "|随机|");
-    default_label->setColor(Color3B::BLACK);
-    default_label->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
-    this->addChild(default_label, 2);
+    auto defaultLabel = Label::createWithTTF(ttf, "|随机|");
+    defaultLabel->setColor(Color3B::BLACK);
+    defaultLabel->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
+    this->addChild(defaultLabel, 2);
     MenuItemFont::setFontName("Arial");
     MenuItemFont::setFontSize(90);
     auto defaultItem = MenuItemFont::create("        ", CC_CALLBACK_1(WordsScene::defaultCallback, this));
     
     // create menu, it's an autorelease object
-    auto default_menu = Menu::create(defaultItem, NULL);
-    default_menu->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
-    this->addChild(default_menu, 1);
+    auto defaultMenu = Menu::create(defaultItem, NULL);
+    defaultMenu->setPosition(Vec2(label->getPositionX()/0.66, label->getPositionY()/2));
+    this->addChild(defaultMenu, 1);
     
     // background image
-    auto sprite = Sprite::create(BGSRC);
+    auto background = Sprite::create(BGSRC);
     
     // position it on the center of the screen
-    sprite->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
-    this->addChild(sprite, 0);
+    background->setPosition(Vec2(WIDTH/2 + ORIGIN_X, HEIGHT/2 + ORIGIN_Y));
+    this->addChild(background, 0);
     
     return true;
 }
