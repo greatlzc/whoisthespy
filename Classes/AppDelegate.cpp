@@ -66,7 +66,10 @@ void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
     // if you use SimpleAudioEngine, it must be pause
-    CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+    if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying())
+    {
+        CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+    }
 }
 
 // this function will be called when the app is active again
@@ -74,5 +77,7 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-    CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+    if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+    }
 }
